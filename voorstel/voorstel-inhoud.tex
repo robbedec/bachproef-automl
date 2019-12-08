@@ -19,7 +19,7 @@ Machine learning en eenvoudig in dezelfde zin gebruiken, geen vanzelfsprekende o
 
 Geautomatiseerde machine learning is het automatiseren van het trainingsproces bij een artificieel neuraal netwerk. De lage toegangsdrempel zorgt ervoor dat mensen met beperkte machine learning kennis sneller en simpeler een model kunnen trainen en gebruiken.
 
-\subsection{Achterliggende werking}
+\subsection{Natural Architecture Search}
 
 \begin{figure}
     \includegraphics[width=\linewidth]{img/nas.png}
@@ -33,10 +33,13 @@ Natural Architecture Search gebruikt Reinforcement Learning om een model te trai
 
 Op figuur \ref{fig:nas} wordt gevisualiseerd hoe dit werkt. Op basis van controller structuur A (waarbij A een neuraal netwerk is) wordt een string met variabele lengte gegenereerd. Deze waarden worden gebruikt als parameters om een kind-netwerk aan te maken, die getraind wordt met echte data en waarbij de accuraatheid gemeten wordt aan de hand van een validatie dataset. Het resultaat wordt gebruikt als beloningssignaal voor de controller, bij de volgende iteratie kunnen er hogere kansen gegeven worden aan parameters die leiden tot accurate voorspellingen \autocite{ZophL2016}. De controller zijn zoekfunctie zal dus verbeteren over tijd.
 
+\subsection{Hyperparameter tuning}
 
+In de vorige sectie is het gebruik van parameters aan bod gekomen. Ze bepalen het gedrag van een neuraal netwerk en zijn bepalend voor het eindresultaat. Volgens \textcite{Brust2019} zijn verschillende manieren om dit te behandelen. Brute force zal elke configuratie overlopen en beslissen hoe het model vordert terwijl feature selection gewichten aan verschillende parameters geeft. Op die manier hebben vorige simulaties een impact bij de selectie van een nieuwe set parameters \autocite{Claesen2015}.
 
-\subsection{Gelijkaardige tools}
-sdfq
+\subsection{AutoML platformen}
+
+Eerder is Google Cloud AutoML al aan bod gekomen. De familiaire interface helpt een gebruiker snel op weg. Naast Google hebben bedrijven zoals Microsoft en Amazon een platform gebouwd op hun respectievelijke cloud infrastructuur. De AutoML service kan voordelig zijn als het bedrijf al verwerkt zit in de stack, extra kosten kunnen snel de lucht in gaan zonder toegang tot andere functies (bv. van Google Cloud) als dit niet het geval is. Een open source alternatief lijkt een goede oplossing, de interfaces zijn minder gebruiksvriendelijk dan een betalend product en er komt meer programmeerwerk aan te pas. Het resultaat is vaak commercieel bruikbaar zolang de restricties van de licentie gerespecteerd worden \autocite{Balter2015}. AutoKeras is een voorbeeld onder de MIT licentie, die geen commerciële restricties oplegt.
 
 %---------- Methodologie ------------------------------------------------------
 \section{Methodologie}
@@ -67,7 +70,7 @@ Figuur \ref{fig:boxplot1} bevat een voorspelling van de prestaties voor de versc
 \section{Verwachte conclusies}
 \label{sec:verwachte_conclusies}
 
-AutoML zal zeker zijn plaats houden binnen het domein van machine learning. De Google Cloud AutoML interface zorgt voor een gebruiksvriendelijke omgeving waar zeer weinig programmatie aan te pas komt. Met AutoKeras moet de gebruiker meer kennis hebben van Python libraries (pandas, numpy, keras...) om tot hetzelfde resultaat te verkrijgen. 
+AutoML zal zeker zijn plaats houden binnen het domein van machine learning. De Google Cloud AutoML interface zorgt voor een gebruiksvriendelijke omgeving waar zeer weinig programmatie aan te pas komt. Met AutoKeras moet de gebruiker meer kennis hebben van Python libraries (pandas, numpy, keras...) om hetzelfde resultaat te verkrijgen. 
 
 Voor bedrijven lijkt het interessanter om voor open source te kiezen als het overeen komt met hun identiteit. Zo kunnen developers een kleine machine learning implementatie voorzien terwijl een data scientist zich kan bezig houden in grotere projecten.
 
