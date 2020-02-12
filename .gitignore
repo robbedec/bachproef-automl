@@ -5,7 +5,7 @@
 *.bak
 
 # Input files
-.data
+data/
 
 ## Jupyter Notebooks
 .ipynb_checkpoints
