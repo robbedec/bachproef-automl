@@ -4,6 +4,9 @@
 *.sav
 *.bak
 
+# Input files
+.data
+
 ## Jupyter Notebooks
 .ipynb_checkpoints
 
