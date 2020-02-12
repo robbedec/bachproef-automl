@@ -4,6 +4,9 @@
 *.sav
 *.bak
 
+## Jupyter Notebooks
+.ipynb_checkpoints
+
 ## R
 .RData
 .Rhistory
