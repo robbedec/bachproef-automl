@@ -5,32 +5,47 @@
 \chapter{\IfLanguageName{dutch}{Inleiding}{Introduction}}
 \label{ch:inleiding}
 
-De inleiding moet de lezer net genoeg informatie verschaffen om het onderwerp te begrijpen en in te zien waarom de onderzoeksvraag de moeite waard is om te onderzoeken. In de inleiding ga je literatuurverwijzingen beperken, zodat de tekst vlot leesbaar blijft. Je kan de inleiding verder onderverdelen in secties als dit de tekst verduidelijkt. Zaken die aan bod kunnen komen in de inleiding~\autocite{Pollefliet2011}:
+Het informatie tijdperk centraliseert zich momenteel rond data. Bedrijven zien ook de toegevoegde waarde die het kan hebben in hun bedrijfsprocessen, kijk maar naar de grote spelers in de informaticawereld waar het begrip Big Data is ontstaan. In zijn ruwe vorm lijkt het op een gigantische hoop waaruit je niks kan leren, maar wanneer men deze gaat structureren zijn er plots allemaal nieuwe toepassingen beschikbaar. 
+Eén van deze toepassingen die intensief gebruik maakt van data, is machine learning. Hierbij wordt geprobeerd computers zaken aan te leren met behulp van een iteratief proces zonder expliciet geprogrammeerd te zijn voor de taken die ze uitvoeren. Mensen die goed overweg kunnen met de data om zo'n model te maken (Machine Learning Engineers / Data Scientists ...)  zijn vaak moeilijk te vinden. Alhoewel het interesseveld ontstaan is in de jaren '50, is het nog maar sinds kort een hot topic met dank aan doorbraken die bruikbaar zijn voor het publiek.
 
-\begin{itemize}
-  \item context, achtergrond
-  \item afbakenen van het onderwerp
-  \item verantwoording van het onderwerp, methodologie
-  \item probleemstelling
-  \item onderzoeksdoelstelling
-  \item onderzoeksvraag
-  \item \ldots
-\end{itemize}
+Geautomatiseerde machine learning platformen trachten een oplossing te bieden voor development teams zonder gespecialiseerde machine learning expert. Het platform voert alle stappen van het proces uit en uiteindelijk moet het team enkel het model in hun product integreren. Deze manier van werken verlaagt niet alleen de druk op machine learning experten maar het geeft hen ook de mogelijkheid om mee te werken aan uitdagende projecten of zelf onderzoek te voeren. Omdat bedrijven tot nu toe weinig contact hebben met AI en alles wat er toe behoort, zijn de meeste cases vergelijkbaar met elkaar. Zo heb je bijvoorbeeld binaire classificatie problemen, tekst analyse en meer. Waarom zou het dan niet mogelijk zijn om dit te automatiseren? 
+
+In dit onderzoek wordt bekeken hoe laag de werkelijke instapdrempel ligt bij verschillende platformen (open-source en private oplossingen), alsook hoe zo'n model werkt en welke resultaten je bekomt voor een simpel maar realistisch classificatie probleem.
 
 \section{\IfLanguageName{dutch}{Probleemstelling}{Problem Statement}}
 \label{sec:probleemstelling}
 
-Uit je probleemstelling moet duidelijk zijn dat je onderzoek een meerwaarde heeft voor een concrete doelgroep. De doelgroep moet goed gedefinieerd en afgelijnd zijn. Doelgroepen als ``bedrijven,'' ``KMO's,'' systeembeheerders, enz.~zijn nog te vaag. Als je een lijstje kan maken van de personen/organisaties die een meerwaarde zullen vinden in deze bachelorproef (dit is eigenlijk je steekproefkader), dan is dat een indicatie dat de doelgroep goed gedefinieerd is. Dit kan een enkel bedrijf zijn of zelfs één persoon (je co-promotor/opdrachtgever).
+Met een onschatbare hoeveelheid data die de dag van vandaag aanwezig is, is het belangrijk om deze op te schonen en features te selecteren zodat het gebruikt kan worden in een specifieke situatie. De hoeveelheid data groeit vele malen sneller dan het aantal beschikbare experten. Er moet dus naar een manier gezocht worden om machine learning dichter bij de man te brengen zodat mensen met een uitgebreide machine learning kennis niet vast zitten met basis problemen die ze eerder al op een gelijkaardige manier opgelost hebben.
+
+Deze platformen kunnen mogelijks een oplossing bieden voor kleine zelf organiserende development teams die graag een machine learning aspect willen toevoegen aan hun project. Dit liefst met een minimale input van de ontwikkelaars.
 
 \section{\IfLanguageName{dutch}{Onderzoeksvraag}{Research question}}
 \label{sec:onderzoeksvraag}
 
-Wees zo concreet mogelijk bij het formuleren van je onderzoeksvraag. Een onderzoeksvraag is trouwens iets waar nog niemand op dit moment een antwoord heeft (voor zover je kan nagaan). Het opzoeken van bestaande informatie (bv. ``welke tools bestaan er voor deze toepassing?'') is dus geen onderzoeksvraag. Je kan de onderzoeksvraag verder specifiëren in deelvragen. Bv.~als je onderzoek gaat over performantiemetingen, dan 
+\subsection{Hoofdonderzoeksvraag}
+\label{subsec:hoofdonderzoeksvraag}
+
+Met dit onderzoek wordt nagegaan als deze nieuwe technologie capabel is om triviale machine learning problemen op te lossen, al dan niet met minimale input van een developer. Het is duidelijk dat autoML in zijn huidige staat niet klaar is voor uitdagende cases, maar het kan wel toegang geven tot nieuwe functies aan development teams met weinig/geen machine learning kennis.
+
+\subsection{Deelonderzoeksvragen}
+\label{subsec:deelonderzoeksvragen}
+
+Naast de hoofdonderzoeksvraag wordt er ook kort ingegaan en antwoord gegeven op:
+
+\begin{itemize}
+    \item Welke onderliggende technieken worden gebruikt bij geautomatiseerde machine learning.
+    \item Kies je best voor een open source library of toch een commercieel platform.
+    \item Is de performantie van deze platformen vergelijkbaar met die van een traditioneel gebouwd model.
+\end{itemize}
 
 \section{\IfLanguageName{dutch}{Onderzoeksdoelstelling}{Research objective}}
 \label{sec:onderzoeksdoelstelling}
 
 Wat is het beoogde resultaat van je bachelorproef? Wat zijn de criteria voor succes? Beschrijf die zo concreet mogelijk. Gaat het bv. om een proof-of-concept, een prototype, een verslag met aanbevelingen, een vergelijkende studie, enz.
+
+De belangrijkste doelstelling van dit onderzoek is reproduceren van een realistische situatie die eerder op de traditionele manier opgelost is, en deze op een gelijkaardig niveau te reproduceren met automated machine learning. Dit is mogelijk door de verschillende metrieken en performaties van de modellen met elkaar te vergelijken. We zien het experiment als geslaagd als de behaalde scores bij elkaar in de buurt liggen.
+
+Naast een proof-of-concept wordt ook een vergelijkende studie uitgevoerd tussen een aantal beschikbare platformen.
 
 \section{\IfLanguageName{dutch}{Opzet van deze bachelorproef}{Structure of this bachelor thesis}}
 \label{sec:opzet-bachelorproef}
