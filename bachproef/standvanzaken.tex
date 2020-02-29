@@ -109,7 +109,7 @@ In de vorige sectie is het gebruik van parameters aan bod gekomen. Neural Archit
 
 \begin{figure}
     \includegraphics[width=\linewidth]{img/google-cloud-automl.png}
-    \caption{Stappenplan voor een geautomatiseerd model in de cloud}
+    \caption{Stappenplan voor een geautomatiseerd model in de cloud \autocite{Google2019}}
     \label{fig:google-cloud-automl}
 \end{figure}
 
@@ -133,10 +133,9 @@ Voor de Image Classifier is het voorbeeld uitgewerkt met de MNIST Hand-Written D
 
 Het is aangewezen om het model te trainen op een machine met een externe grafische kaart die ondersteund wordt door de NVIDIA CUDA Toolkit.
 
-\subsection{title}
-
-Voor een development team is het niet voldoende om enkel en alleen een model te trainen. Om het te kunnen gebruiken moet het ergens online staan zodat de applicatie waarin het verwerkt zit kan communiceren met het model. Bij de grote platformen zal het uitgerold worden op hun cloud services. Dat maakt nu eenmaal deel uit van hun kostenmodel. De gebruiker hangt dus in enigste zin vast aan zijn provider. 
-
 \section{Deployment}
 
+Voor een development team is het niet voldoende om enkel en alleen een model te trainen. Om het te kunnen gebruiken moet het ergens online staan zodat de applicatie waarin het verwerkt zit kan communiceren met het model. Bij de grote platformen zal het uitgerold worden op hun cloud services. Dat maakt nu eenmaal deel uit van hun kostenmodel. De gebruiker hangt dus in enigste zin vast aan zijn provider. 
 In open source libraries is daar geen rekening mee gehouden. Een simpele oplossing is om zelf een REST API te schrijven. Er is geen beste manier omdat elke implementatie afhankelijk is van het export type van de library die je gebruikt. Om toch een representatief voorbeeld te geven wordt het deployment proces van een Keras model (export type van AutoKeras) besproken. 
+
+Een goede strategie is om je API te bouwen in de taal waarin de library geschreven is. Zo kan je de bestaande interfaces van het geëxporteerde model direct aanspreken. In dit geval is het Python + Flask framework. Om het op een productie niveau te krijgen is het een goed idee om ook Redis te gebruiken\footnote{Redis is een gedistribueerde key-value store die volledige objecten in zijn geheugen kan opslaan en in deze situatie gebruikt wordt om wachtrijen te optimaliseren \autocite{Adrian2018}.}.
