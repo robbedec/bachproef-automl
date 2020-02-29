@@ -10,14 +10,14 @@ jobs:
 
     runs-on: ubuntu-latest
     env:
-        FIRST_NAME: Milad
-        LAST_NAME: Nazari
+        FIRST_NAME: Robbe
+        LAST_NAME: Decorte
     steps:
     - uses: actions/checkout@v1
     - name: Compile bachelor thesis proposition
       uses: xu-cheng/latex-action@1.2.1
       with:
-          root_file: voorstel.tex
+          root_file: decorte_robbe_voorstel.tex
           working_directory: ./voorstel
     - name: Compile bachelor thesis
       uses: xu-cheng/latex-action@1.2.1
