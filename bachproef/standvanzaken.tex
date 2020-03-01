@@ -90,19 +90,29 @@ In figuur \ref{fig:transfer-learning} is zichtbaar hoe een traditioneel model ve
 
 Dergelijke geautomatiseerde machine learning systemen gebruiken een techniek die het ontwerp van een artificieel neuraal netwerk kan automatiseren, beter bekend als Neural Architecture Search \autocite{Elsken2019}. Uit \textcite{ZophL2016} wordt vastgesteld dat deze techniek een gelijkaardige of zelfs betere performantie heeft dan modellen die door een ML-ingenieur ontworpen zijn.
 
+De technieken uit Sectie \ref{sec:hyperparameter-tuning} zijn onderliggend verwerkt en spelen een belangrijke rol binnen het domein van machine learning \autocite{ZophL2016}.
+
 \subsubsection{Gebruik van Reinforcement Learning}
 
 Neural Architecture Search gebruikt Reinforcement Learning om een model te trainen. Deze manier van werken is fundamenteel anders dan gesuperviseerd / ongesuperviseerd leren omdat het model niet beter wordt door het gebruik van datasets. Als alternatief kan het neuraal netwerk beloningssignalen herkennen waardoor het kan leren welke acties leiden tot een positief resultaat \autocite{Lievens2019}.
 
-Op figuur \ref{fig:nas-bp} wordt gevisualiseerd hoe dit werkt. Op basis van controller structuur A (waarbij A een neuraal netwerk is) wordt een string met variabele lengte gegenereerd. Deze waarden worden gebruikt als parameters om een kind-netwerk aan te maken, die getraind wordt met echte data en waarbij de accuraatheid gemeten wordt aan de hand van een validatie dataset. Het resultaat wordt gebruikt als beloningssignaal voor de controller, bij de volgende iteratie kunnen er hogere kansen gegeven worden aan parameters die leiden tot accurate voorspellingen \autocite{ZophL2016}. De controller zijn zoekfunctie zal dus verbeteren over tijd.
+Op figuur \ref{fig:nas-bp} wordt gevisualiseerd hoe dit werkt. Op basis van controller structuur A (waarbij A een neuraal netwerk is) wordt een string met variabele lengte gegenereerd. Deze waarden worden gebruikt als hyperparameters om een kind-netwerk aan te maken, die getraind wordt met echte data en waarbij de accuraatheid gemeten wordt aan de hand van een validatie dataset. Het resultaat wordt gebruikt als beloningssignaal voor de controller, bij de volgende iteratie kunnen er hogere kansen gegeven worden aan parameters die leiden tot accurate voorspellingen \autocite{ZophL2016}. De controller zijn zoekfunctie zal dus verbeteren over tijd.
 
 \section{Hyperparameter tuning}
 \label{sec:hyperparameter-tuning}
 
 In de vorige sectie is het gebruik van parameters aan bod gekomen. Neural Architecture Search en Hyperparameter tuning zijn dan ook sterk gerelateerd aan elkaar. De normale parameter bepalen het gedrag van een neuraal netwerk en hebben een grote invloed op het eindresultaat. Het gegeven gewicht aan een parameter stelt, zoals eerder vermeld, hoe groot de invloed is van deze laag / neuron op de voorspelling. \textcite{GoogleHT2020} verduidelijkt dat Hyperparameters eigen zijn aan de configuratie en niet aan het model. Zo moet er bepaald worden hoeveel lagen en het aantal neuronen per laag er zijn. Tijdens het trainen blijven deze constant. Volgens \textcite{Brust2019} zijn er verschillende manieren om de hyperparameters te optimaliseren. Brute force zal elke configuratie overlopen en beslissen hoe het model vordert terwijl feature selection gewichten aan verschillende hyperparameters geeft. Op die manier hebben vorige simulaties een impact bij de selectie van een nieuwe set parameters \autocite{Claesen2015}.
 
+\textcite{ZophL2016} stelt dat deze methode in het algemeen minder goed werkt dan Neural Architecture Search, dit is omdat de netwerk configuraties gevormd worden in een zoekruimte met vaste lengte. Bayesian optimization \autocite{Bergstra2011}, een variant van hyperparameter tuning, werkt wel met variabele zoekruimtes maar blijven minder flexibel dan wat er voorgesteld wordt bij Neural Architecture Search \autocite{ZophL2016}.
+
 \subsection{Bayesian optimization, meta-learning en ensemble construction}
 \label{subsec:bayesian}
+
+\subsection{Meta-learning}
+\label{subsec:meta-learning}
+
+\subsection{Ensemble construction}
+\label{subsec:ensemble-construction}
 
 \section{AutoML platformen}
 \label{sec:automl-platformen}
