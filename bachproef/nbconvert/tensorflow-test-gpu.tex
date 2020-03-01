@@ -1,0 +1,54 @@
+\hypertarget{check-if-tensorflow-uses-the-gpu}{%
+\section{Check if tensorflow uses the
+gpu}\label{check-if-tensorflow-uses-the-gpu}}
+
+\begin{lstlisting}[language=bash]
+conda install -c anaconda keras-gpu
+\end{lstlisting}
+
+\begin{lstlisting}[language=Python]
+from tensorflow.python.client import device_lib
+print(device_lib.list_local_devices())
+\end{lstlisting}
+
+\begin{lstlisting}
+[name: "/device:CPU:0"
+device_type: "CPU"
+memory_limit: 268435456
+locality {
+}
+incarnation: 4667854266086913343
+, name: "/device:GPU:0"
+device_type: "GPU"
+memory_limit: 3142752665
+locality {
+  bus_id: 1
+  links {
+  }
+}
+incarnation: 7446222594720567173
+physical_device_desc: "device: 0, name: GeForce GTX 1050, pci bus id: 0000:01:00.0, compute capability: 6.1"
+]
+\end{lstlisting}
+
+\begin{lstlisting}[language=Python]
+import tensorflow as tf
+tf.test.gpu_device_name()
+\end{lstlisting}
+
+\begin{lstlisting}
+'/device:GPU:0'
+\end{lstlisting}
+
+\begin{lstlisting}[language=Python]
+from tensorflow.python.client import device_lib
+def get_available_devices():
+    local_device_protos = device_lib.list_local_devices()
+    return [x.name for x in local_device_protos]
+print(get_available_devices()) 
+\end{lstlisting}
+
+\begin{lstlisting}
+['/device:CPU:0', '/device:GPU:0']
+\end{lstlisting}
+

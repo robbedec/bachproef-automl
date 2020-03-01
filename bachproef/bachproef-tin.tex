@@ -6,6 +6,7 @@
 \documentclass{bachproef-tin}
 
 \usepackage{hogent-thesis-titlepage} % Titelpagina conform aan HOGENT huisstijl
+\usepackage[final]{pdfpages}
 
 %%---------- Documenteigenschappen ---------------------------------------------
 % TODO: Vul dit aan met je eigen info:
@@ -122,6 +123,36 @@ Het onderwerp van deze bachelorproef is gebaseerd op een onderzoeksvoorstel dat 
 %%---------- Andere bijlagen --------------------------------------------------
 % TODO: Voeg hier eventuele andere bijlagen toe
 %\input{...}
+
+\chapter{AutoKeras cats vs dogs}
+
+\includepdf[
+%% Include all pages of the PDF
+pages=-,
+%% make this page have the usual page style
+%% (you can change it to plain etc). By default pdfpages
+%% sets the pagecommand to \pagestyle{empty}
+pagecommand={\pagestyle{headings}},  
+%% Add a "section" entry to the ToC with the heading
+%% "Quilling Shapes" and the label "sec:shapes"
+addtotoc={1,section,1, Verifiëren van GPU status,sec:gpu}]
+%% The pdf file itself
+{./nbconvert/tensorflow-test-gpu.pdf}
+
+\includepdf[
+%% Include all pages of the PDF
+pages=-,
+%% make this page have the usual page style
+%% (you can change it to plain etc). By default pdfpages
+%% sets the pagecommand to \pagestyle{empty}
+pagecommand={\pagestyle{empty}},  
+%% Add a "section" entry to the ToC with the heading
+%% "Quilling Shapes" and the label "sec:shapes"
+addtotoc={1,section,1, Trainen met AutoKeras,sec:autokeras}]
+%% The pdf file itself
+{./nbconvert/autokeras-v2.pdf}
+
+
 
 %%---------- Referentielijst --------------------------------------------------
 
