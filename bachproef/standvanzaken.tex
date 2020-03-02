@@ -64,7 +64,7 @@ Reinforcement learning focust zich op de acties die een software agent onderneem
 Deze techniek wordt verder besproken in het deel over geautomatiseerde machine learning.
 
 
-Geautomatiseerde machine learning is het automatiseren van het trainingsproces bij een artificieel neuraal netwerk. De lage toegangsdrempel zorgt ervoor dat mensen met beperkte machine learning kennis sneller en simpeler een model kunnen trainen en gebruiken.
+Geautomatiseerde \textit{machine learning} is het automatiseren van het trainingsproces bij een artificieel neuraal netwerk. De lage toegangsdrempel zorgt ervoor dat mensen met beperkte \textit{machine learning }kennis sneller en simpeler een model kunnen trainen en gebruiken.
 
 \subsubsection{Transfer Learning}
 \label{subsubsec:transfer-learning}
@@ -78,6 +78,19 @@ Geautomatiseerde machine learning is het automatiseren van het trainingsproces b
 Een andere manier om een neuraal netwerk te trainen is eerst een gegeneraliseerd model maken en die later specifiek toepassen op de situatie waarin het zich bevindt. Het idee achter transfer learning komt hierop neer, een gegeneraliseerd model kan vormen, kleurveranderingen en hoeken herkennen. Door de laatste lagen van het model af te knippen en nieuwe meer gespecialiseerde lagen toevoegt, zeg je in principe welke soort van de opgesomde eigenschappen het moet herkennen \autocite{Khandelwal2019}. 
 
 In figuur \ref{fig:transfer-learning} is zichtbaar hoe een traditioneel model verschilt van een model getraind met transfer learning. Voor verschillende taken hoeft het niet volledig opnieuw getraind worden (op voorwaarde dat het binnen de generalisatie valt) en kan je de laatste lagen fine-tunen naar wens. Zo kan een model getraind worden om voertuigen te herkennen en later gespecialiseerd worden naar bijvoorbeeld auto's, vrachtwagens, fietsen of moto's.
+
+\section{Proces model van een data analyse}
+\label{sec:proces-model}
+
+\begin{figure}
+    \includegraphics[width=\linewidth]{img/proces-model.png}
+    \caption{Verschillende stappen in een data analyse project \autocite{Lemahieu2018}}
+    \label{fig:proces-model.png}
+\end{figure}
+
+Volgens \textcite{Lemahieu2018} bestaat elk data analyse project uit 7 verschillende stappen, in de gegeven volgorde van figuur \ref{fig:proces-model.png}. Er wordt aangenomen dat 80-90\% van de totale tijd gespendeerd wordt aan \textit{preprocessing} van de data. Voordat een AutoML systeem bruikbaar is in de situatie van dit onderzoek moet het in staat zijn om de initiële stap uit te voeren. Het identificeren van het business probleem en de \textit{data sources} mogen al uitgesloten worden, de opdracht die een development team krijgt bevat alle informatie. 
+
+We zijn dus niet enkel op zoek naar een oplossing die een analyse kan uitvoeren en interpreteren, maar ook naar iets dat data op een correcte manier kan behandelen zodat er een autonoom systeem gevormd wordt. 
 
 \section{Neural Architecture Search}
 \label{sec:nas}
@@ -93,6 +106,7 @@ Dergelijke geautomatiseerde machine learning systemen gebruiken een techniek die
 De technieken uit Sectie \ref{sec:hyperparameter-tuning} zijn onderliggend verwerkt en spelen een belangrijke rol binnen het domein van machine learning \autocite{ZophL2016}.
 
 \subsubsection{Gebruik van Reinforcement Learning}
+\label{subsubsec:nas-reinforcement}
 
 Neural Architecture Search gebruikt Reinforcement Learning om een model te trainen. Deze manier van werken is fundamenteel anders dan gesuperviseerd / ongesuperviseerd leren omdat het model niet beter wordt door het gebruik van datasets. Als alternatief kan het neuraal netwerk beloningssignalen herkennen waardoor het kan leren welke acties leiden tot een positief resultaat \autocite{Lievens2019}.
 
@@ -130,12 +144,14 @@ Een open source alternatief lijkt een goede oplossing, de interfaces zijn minder
 In deze sectie worden enkele mogelijkheden besproken.
 
 \subsection{Google Cloud AutoML}
+\label{subsec:google-automl}
 
 Google Cloud AutoML zorgt voor een familiaire interface die een gebruiker snel op weg helpt. Naast Google hebben bedrijven zoals Microsoft en Amazon een platform gebouwd op hun respectievelijke cloud infrastructuur. De AutoML service kan voordelig zijn als het bedrijf al gebruik maakt van andere producten / diensten van de leverancier, extra kosten kunnen snel de lucht in gaan zonder toegang tot andere functies (bv. van Google Cloud) als dit niet het geval is. 
 
 Zoals veel Google producten, heeft Cloud AutoML een familiaire interface die een gebruiker snel op weg helpt. Het proces is bijna even simpel als hun voorstelling in figuur \ref{fig:google-cloud-automl}, enkel het structureren van de dataset is niet opgenomen in de flow. De AutoML service heeft een goede kans om door te groeien in het bestaande platform van Google Cloud. De simultane werking tussen meerdere Cloud producten kan interessant zijn mocht het bedrijf gepartnered is met Google.
 
 \subsection{AutoKeras}
+\label{subsec:autokeras}
 
 Een AutoML systeem gebaseerd op Keras. De bedoeling van deze library is om machine learning toegankelijk te maken voor iedereen \autocite{jin2019}. AutoKeras is op dit moment nog in pre-release en kan nog sterk veranderen in de toekomst. Het gebruik is redelijk vanzelfsprekend en een volledige beschrijving van tekst en afbeeldingsanalyse zijn beschikbaar op de website. Van alle opgelijste mogelijkheden, vraagt deze library het meeste werk naast het voorzien van de data. Zo moet het model lokaal getraind worden en niet in de cloud, en moet de gebruiker een basis kennis Python hebben (om met de classifier van start te gaan). Een lokaal getraind model brengt ook wat voordelen met zich mee. Zo is er de mogelijkheid om het te exporteren naar een werkend Keras model dat nog verder aangepast kan worden. 
 
@@ -144,10 +160,11 @@ Voor de Image Classifier is het voorbeeld uitgewerkt met de MNIST Hand-Written D
 Het is aangewezen om het model te trainen op een machine met een externe grafische kaart die ondersteund wordt door de NVIDIA CUDA Toolkit.
 
 \section{Deployment}
+\label{sec:deployment}
 
 Voor een development team is het niet voldoende om enkel en alleen een model te trainen. Om het te kunnen gebruiken moet het ergens online staan zodat de applicatie waarin het verwerkt zit kan communiceren met het model. Bij de grote platformen zal het uitgerold worden op hun cloud services. Dat maakt nu eenmaal deel uit van hun kostenmodel. De gebruiker hangt dus in enigste zin vast aan zijn provider. 
 In open source libraries is daar geen rekening mee gehouden. Een simpele oplossing is om zelf een REST API te schrijven. Er is geen beste manier omdat elke implementatie afhankelijk is van het export type van de library die je gebruikt. Om toch een representatief voorbeeld te geven wordt het deployment proces van een Keras model (export type van AutoKeras) besproken. 
 
-Een goede strategie is om je API te bouwen in de taal waarin de library geschreven is. Zo kan je de bestaande interfaces van het geëxporteerde model direct aanspreken. In dit geval is het Python + Flask framework. Om het op een productie niveau te krijgen is het een goed idee om ook Redis te gebruiken\footnote{Redis is een gedistribueerde key-value store die volledige objecten in zijn geheugen kan opslaan en in deze situatie gebruikt wordt om wachtrijen te optimaliseren \autocite{Adrian2018}.}. Dan rest enkel nog de hosting, waardoor je soms toch uitkomt bij de grote platformen zoals Amazon AWS, Google Cloud Hosting enzovoort.
+Een goede strategie is om je API te bouwen in de taal waarin de library geschreven is. Zo kan je de bestaande interfaces van het geëxporteerde model direct aanspreken. In dit geval is het Python + Flask framework. Om het op een productie niveau te krijgen is het een goed idee om ook Redis\footnote{Redis is een gedistribueerde key-value store die volledige objecten in zijn geheugen kan opslaan en in deze situatie gebruikt wordt om wachtrijen te optimaliseren \autocite{Adrian2018}.} te implementeren. Dan rest enkel nog de hosting, waardoor je soms toch uitkomt bij de grote platformen zoals Amazon AWS, Google Cloud Hosting enzovoort.
 
 In \textcite{Adrian2018} is de volledige code te vinden om stap voor stap uit te voeren wat hierboven beschreven is.
