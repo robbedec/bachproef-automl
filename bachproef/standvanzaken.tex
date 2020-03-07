@@ -90,7 +90,7 @@ In figuur \ref{fig:transfer-learning} is zichtbaar hoe een traditioneel model ve
 
 Volgens \textcite{Lemahieu2018} bestaat elk data analyse project uit 7 verschillende stappen, in de gegeven volgorde van figuur \ref{fig:proces-model.png}. Er wordt aangenomen dat 80-90\% van de totale tijd gespendeerd wordt aan \textit{preprocessing} van de data. Voordat een AutoML systeem bruikbaar is in de situatie van dit onderzoek moet het in staat zijn om de initiële stap uit te voeren. Het identificeren van het business probleem en de \textit{data sources} mogen al uitgesloten worden, de opdracht die een development team krijgt bevat alle informatie. 
 
-We zijn dus niet enkel op zoek naar een oplossing die een analyse kan uitvoeren en interpreteren, maar ook naar iets dat data op een correcte manier kan behandelen zodat er een autonoom systeem gevormd wordt. 
+We zijn dus niet enkel op zoek naar een oplossing die analyses kan uitvoeren en interpreteren, maar ook naar iets dat data op een correcte manier kan behandelen zodat er een autonoom systeem gevormd wordt. 
 
 \section{Neural Architecture Search}
 \label{sec:nas}
@@ -115,15 +115,23 @@ Op figuur \ref{fig:nas-bp} wordt gevisualiseerd hoe dit werkt. Op basis van cont
 \section{Hyperparameter tuning}
 \label{sec:hyperparameter-tuning}
 
-In de vorige sectie is het gebruik van parameters aan bod gekomen. Neural Architecture Search en Hyperparameter tuning zijn dan ook sterk gerelateerd aan elkaar. De normale parameter bepalen het gedrag van een neuraal netwerk en hebben een grote invloed op het eindresultaat. Het gegeven gewicht aan een parameter stelt, zoals eerder vermeld, hoe groot de invloed is van deze laag / neuron op de voorspelling. \textcite{GoogleHT2020} verduidelijkt dat Hyperparameters eigen zijn aan de configuratie en niet aan het model. Zo moet er bepaald worden hoeveel lagen en het aantal neuronen per laag er zijn. Tijdens het trainen blijven deze constant. Volgens \textcite{Brust2019} zijn er verschillende manieren om de hyperparameters te optimaliseren. Brute force zal elke configuratie overlopen en beslissen hoe het model vordert terwijl feature selection gewichten aan verschillende hyperparameters geeft. Op die manier hebben vorige simulaties een impact bij de selectie van een nieuwe set parameters \autocite{Claesen2015}.
+In de vorige sectie is het gebruik van parameters aan bod gekomen. Neural Architecture Search en Hyperparameter tuning zijn dan ook sterk gerelateerd aan elkaar. De normale parameters bepalen het gedrag van een neuraal netwerk en hebben een grote invloed op het eindresultaat. Het gegeven gewicht aan een parameter stelt, zoals eerder vermeld, hoe groot de invloed is van deze laag / neuron op de voorspelling. \textcite{GoogleHT2020} verduidelijkt dat Hyperparameters eigen zijn aan de configuratie en niet aan het model. Zo moet er bepaald worden hoeveel lagen en het aantal neuronen per laag er zijn. Tijdens het trainen blijven deze constant. Volgens \textcite{Brust2019} zijn er verschillende manieren om de hyperparameters te optimaliseren. \textit{Brute force} zal elke configuratie overlopen en beslissen hoe het model vordert terwijl \textit{feature selection} gewichten aan verschillende hyperparameters geeft. Op die manier hebben vorige simulaties een impact bij de selectie van een nieuwe set hyperparameters \autocite{Claesen2015}. In \textcite{Bergstra2011} wordt nog gesproken over \textit{Random Search} die in sommige gevallen dezelfde (slechte) performantie heeft als \textit{Brute force}, en de meer gesofisticeerde methodes die verder besproken worden. 
 
-\textcite{ZophL2016} stelt dat deze methode in het algemeen minder goed werkt dan Neural Architecture Search, dit is omdat de netwerk configuraties gevormd worden in een zoekruimte met vaste lengte. Bayesian optimization \autocite{Bergstra2011}, een variant van hyperparameter tuning, werkt wel met variabele zoekruimtes maar blijven minder flexibel dan wat er voorgesteld wordt bij Neural Architecture Search \autocite{ZophL2016}.
+\textcite{ZophL2016} stelt dat deze methoden in het algemeen minder goed werken dan Neural Architecture Search, dit is omdat de netwerk configuraties gevormd worden in een zoekruimte met vaste lengte. Bayesian optimization \autocite{Bergstra2013}, een variant van hyperparameter tuning, werkt wel met variabele zoekruimtes maar blijven minder flexibel dan wat er voorgesteld wordt bij Neural Architecture Search. In de praktijk bekomt men wel vaak een goed resultaat als er een initieel model bijgeleverd wordt \autocite{ZophL2016}.
+
+\subsection{Meta-learning}
+\label{subsec:meta-learning}
+
+De principes achter de systemen die zelf leren en verbeteren komt uit \textcite{Schmid1987}.
 
 \subsection{Bayesian optimization, meta-learning en ensemble construction}
 \label{subsec:bayesian}
 
-\subsection{Meta-learning}
-\label{subsec:meta-learning}
+\textit{Bayesian optimization} probeert aan de hand van het probabiliteitsmodel P(score|configuratie) voorspellingen te maken over de hyperparameters \autocite{Bergstra2013}. De resultaten worden bekomen door aanpassingen te doen aan de vorige waarden van score en configuratie. In \textcite{Bergstra2013} staat dat de efficiëntie komt van het enkel overlopen van veelbelovende kandidaten uit het origineel systeem.
+
+Desondanks er een extra abstractie laag toegevoegd wordt, is het toch bruikbaar als men honderden hyperparameters moet evalueren \autocite{Bergstra2013}.
+
+Auto-sklearn is een open-source library die gebruik maakt van Bayesian optimization \autocite{Feurer2015}. 
 
 \subsection{Ensemble construction}
 \label{subsec:ensemble-construction}
