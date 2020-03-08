@@ -103,6 +103,8 @@ We zijn dus niet enkel op zoek naar een oplossing die analyses kan uitvoeren en 
 
 Dergelijke geautomatiseerde machine learning systemen gebruiken een techniek die het ontwerp van een artificieel neuraal netwerk kan automatiseren, beter bekend als Neural Architecture Search \autocite{Elsken2019}. Uit \textcite{ZophL2016} wordt vastgesteld dat deze techniek een gelijkaardige of zelfs betere performantie heeft dan modellen die door een ML-ingenieur ontworpen zijn.
 
+\textit{Neural Architecture Search} is een kostelijk algoritme om uit te voeren op een grote dataset. Daarom wordt er in \textcite{Zoph2017} voorgesteld om een model te trainen voor een (kleinere) proxy dataset en die aan de hand van \textit{transfer learning} te extraheren naar de volledige dataset. Door op voorhand een zoekruimte te definiëren is de complexiteit van de architectuur losstaand van de diepte van het model en de grootte van de afbeeldingen. Met andere woorden wordt er dus gezocht naar de beste lagenstructuur, want die blijven onveranderd bij het transfereren van het model. Deze aanpak komt veel sneller tot zijn resultaat want enkel de gewichten moeten aangepast worden.
+
 De technieken uit Sectie \ref{sec:hyperparameter-tuning} zijn onderliggend verwerkt en spelen een belangrijke rol binnen het domein van machine learning \autocite{ZophL2016}.
 
 \subsubsection{Gebruik van Reinforcement Learning}
@@ -129,9 +131,17 @@ Randinformatie in deze situatie wordt ook metadata genoemd. Dit is niet meer dan
 \subsection{Ensemble construction}
 \label{subsec:ensemble-construction}
 
+\begin{figure}
+    \includegraphics[width=\linewidth]{img/Ozone.png}
+    \caption{De grijze lijnen zijn de voorspellingen van de verschillende algoritmen, de rode lijn is het resultaat van de \textit{ensemble}. Op de grafiek is te zien dat de uitkomst goed veralgemeniseerd is over de punten \autocite{Cen2016}.}
+    \label{fig:ensemble-ozone}
+\end{figure}
+
 Met een \textit{ensemble} bedoelt men een verzameling van \textit{machine learning} algoritmes. Het gebruik van meerdere algoritmes die elkaar aanvullen leiden tot betere resultaten dan één enkel algoritme \autocite{Opitz1999}. Door de extra combinaties die nu gemaakt kunnen worden verhoogt de flexibiliteit. De simpelste manier waarop een ensemble kan werken is \textit{bagging\footnote{Ook gekend als \textit{bootstrap aggregating}.}}. Het laat elk algoritme een \textit{overfitted} voorspelling maken, de uiteindelijke uitkomst is dan het rekenkundig gemiddelde van elke voorspelling \autocite{Decorte2019}. 
 
-Zo kan je bij \textit{random forest}, een ensemble van zoekbomen, een willekeurige factor introduceren in het trainingsproces waardoor elke zoekboom een resultaat uitkomt dat net iets van elkaar verschilt. In \textcite{Decorte2019} zien we dat combineren van al deze resultaten de performantie van het finale model verhoogt.
+Zo kan je bij \textit{random forest}, een ensemble van zoekbomen, een willekeurige factor introduceren in het trainingsproces waardoor elke zoekboom een resultaat uitkomt dat net iets van elkaar verschilt. In \textcite{Decorte2019} zien we dat combineren van al deze resultaten de performantie van het finale model verhoogt zonder dat het \textit{overfitted} is aan de trainingsdataset.
+
+In figuur \ref{fig:ensemble-ozone} is te zien hoe \textit{bagging} tot zijn resultaat komt.
 
 \subsection{Bayesian optimization}
 \label{subsec:bayesian}
