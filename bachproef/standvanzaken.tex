@@ -79,7 +79,7 @@ Een andere manier om een neuraal netwerk te trainen is eerst een gegeneraliseerd
 
 In figuur \ref{fig:transfer-learning} is zichtbaar hoe een traditioneel model verschilt van een model getraind met transfer learning. Voor verschillende taken hoeft het niet volledig opnieuw getraind worden (op voorwaarde dat het binnen de generalisatie valt) en kan je de laatste lagen fine-tunen naar wens. Zo kan een model getraind worden om voertuigen te herkennen en later gespecialiseerd worden naar bijvoorbeeld auto's, vrachtwagens, fietsen of moto's.
 
-\section{Proces model van een data analyse}
+\section{Proces model bij data analyse}
 \label{sec:proces-model}
 
 \begin{figure}
@@ -88,7 +88,7 @@ In figuur \ref{fig:transfer-learning} is zichtbaar hoe een traditioneel model ve
     \label{fig:proces-model.png}
 \end{figure}
 
-Volgens \textcite{Lemahieu2018} bestaat elk data analyse project uit 7 verschillende stappen, in de gegeven volgorde van figuur \ref{fig:proces-model.png}. Er wordt aangenomen dat 80-90\% van de totale tijd gespendeerd wordt aan \textit{preprocessing} van de data. Voordat een AutoML systeem bruikbaar is in de situatie van dit onderzoek moet het in staat zijn om de initiële stap uit te voeren. Het identificeren van het business probleem en de \textit{data sources} mogen al uitgesloten worden, de opdracht die een development team krijgt bevat alle informatie. 
+Volgens \textcite{Lemahieu2018} bestaat elk data analyse project uit 7 verschillende stappen, in de gegeven volgorde van figuur \ref{fig:proces-model.png}. Er wordt aangenomen dat 80-90\% van de totale tijd gespendeerd wordt aan \textit{preprocessing} van de data. Voordat een AutoML systeem bruikbaar is in de situatie van dit onderzoek moet het in staat zijn om de initiële stap uit te voeren. Het identificeren van het business probleem en de \textit{data sources} mogen al uitgesloten worden, de opdracht die een \textit{development} team krijgt bevat idealiter alle informatie. 
 
 We zijn dus niet enkel op zoek naar een oplossing die analyses kan uitvoeren en interpreteren, maar ook naar iets dat data op een correcte manier kan behandelen zodat er een autonoom systeem gevormd wordt. 
 
@@ -124,9 +124,16 @@ In de vorige sectie is het gebruik van parameters aan bod gekomen. Neural Archit
 
 De principes achter de systemen die zelf leren en verbeteren komt uit \textcite{Schmid1987}. Het doel ervan is om aan de hand van randinformatie te begrijpen hoe leerproblemen flexibel worden. Die kennis kan verder ook gebruikt worden om herhalende taken te verbeteren over tijd \autocite{ZophL2016}. De typische benaming is 'leren leren'.
 
-Randinformatie in deze situatie wordt ook metadata genoemd. Dit is niet meer dan informatie over andere data. Voorbeelden van metadata kunnen zijn: eigenschappen van het algoritme (\textit{metrics} die de performantie meten) of het probleem, 
+Randinformatie in deze situatie wordt ook metadata genoemd. Dit is niet meer dan informatie over andere data. Voorbeelden van metadata kunnen zijn: eigenschappen van het algoritme (\textit{metrics} die de performantie meten) of informatie over het probleem. In \textcite{Schmidhuber1993} wordt het principe getoond waarbij een zelf refererend neuraal netwerk zijn eigen gewichtenmatrix kan aanpassen. Een vaak gebruikt aanpassingsalgoritme is \textit{gradient descent} waarbij de principes van \textit{meta-learning} verwerkt worden.
 
-\subsection{Bayesian optimization, meta-learning en ensemble construction}
+\subsection{Ensemble construction}
+\label{subsec:ensemble-construction}
+
+Met een \textit{ensemble} bedoelt men een verzameling van \textit{machine learning} algoritmes. Het gebruik van meerdere algoritmes die elkaar aanvullen leiden tot betere resultaten dan één enkel algoritme \autocite{Opitz1999}. Door de extra combinaties die nu gemaakt kunnen worden verhoogt de flexibiliteit. De simpelste manier waarop een ensemble kan werken is \textit{bagging\footnote{Ook gekend als \textit{bootstrap aggregating}.}}. Het laat elk algoritme een \textit{overfitted} voorspelling maken, de uiteindelijke uitkomst is dan het rekenkundig gemiddelde van elke voorspelling \autocite{Decorte2019}. 
+
+Zo kan je bij \textit{random forest}, een ensemble van zoekbomen, een willekeurige factor introduceren in het trainingsproces waardoor elke zoekboom een resultaat uitkomt dat net iets van elkaar verschilt. In \textcite{Decorte2019} zien we dat combineren van al deze resultaten de performantie van het finale model verhoogt.
+
+\subsection{Bayesian optimization}
 \label{subsec:bayesian}
 
 \textit{Bayesian optimization} probeert aan de hand van het probabiliteitsmodel P(score|configuratie) voorspellingen te maken over de hyperparameters \autocite{Bergstra2013}. De resultaten worden bekomen door aanpassingen te doen aan de vorige waarden van score en configuratie. In \textcite{Bergstra2013} staat dat de efficiëntie komt van het enkel overlopen van veelbelovende kandidaten uit het origineel systeem.
@@ -134,9 +141,6 @@ Randinformatie in deze situatie wordt ook metadata genoemd. Dit is niet meer dan
 Desondanks er een extra abstractie laag toegevoegd wordt, is het toch bruikbaar als men honderden hyperparameters moet evalueren \autocite{Bergstra2013}.
 
 Auto-sklearn is een open-source library die gebruik maakt van Bayesian optimization \autocite{Feurer2015}. 
-
-\subsection{Ensemble construction}
-\label{subsec:ensemble-construction}
 
 \section{AutoML platformen}
 \label{sec:automl-platformen}
@@ -147,7 +151,7 @@ Auto-sklearn is een open-source library die gebruik maakt van Bayesian optimizat
     \label{fig:google-cloud-automl}
 \end{figure}
 
-Het idee van geautomatiseerde toepassingen is niet nieuw, de evolutie van rekenkracht maakt het gewoon mogelijk. Er verschijnen allemaal nieuwe oplossing die runnen in de cloud of lokaal, al dan niet met grafische interfaces enzovoort. Op dit vlak is Google de koploper die het op een gebruiksvriendelijke manier aan de man brengt, maar programmeurs zijn vaak meer dan capabel om meer dan enkel een drag-en-drop systeem te gebruiken. Er zijn dan ook heel wat manieren die meer input vragen maar één bepaald aspect raken bij de gebruiker (open source, start-up, niet gecontroleerd door een groot bedrijf ...). . Met deze platformen probeert de industrie de kloof tussen machine learning en een doorsnee programmeur te dichten \autocite{Gutierrez2019}.
+Het idee van geautomatiseerde toepassingen is niet nieuw, de evolutie van rekenkracht maakt het gewoon mogelijk. Er verschijnen allemaal nieuwe oplossing die runnen in de cloud of lokaal, al dan niet met grafische interfaces enzovoort. Op dit vlak is Google de koploper die het op een gebruiksvriendelijke manier aan de man brengt, maar programmeurs zijn vaak meer dan capabel om meer dan enkel een drag-en-drop systeem te gebruiken. Er zijn dan ook heel wat manieren die meer input vragen maar één bepaald aspect raken bij de gebruiker (open source, start-up, niet gecontroleerd door een groot bedrijf ...). Met deze platformen probeert de industrie de kloof tussen machine learning en een doorsnee programmeur te dichten \autocite{Gutierrez2019}.
 
 Een open source alternatief lijkt een goede oplossing, de interfaces zijn minder gebruiksvriendelijk dan een betalend product en er komt meer programmeerwerk aan te pas. Het resultaat is vaak commercieel bruikbaar zolang de restricties van de licentie gerespecteerd worden \autocite{Balter2015}. AutoKeras is een voorbeeld onder de MIT licentie, die geen commerciële restricties oplegt. Samen met AutoKeras zijn tpot en Auto Sklearn de best ondersteunde libraries.
 
