@@ -7,7 +7,7 @@
 
 % Pas na deze inleidende paragraaf komt de eerste sectiehoofding.
 
-Dit onderzoek richt zich op automatische machine learning platformen. Maar alvorens van start te gaan met de onderliggende technieken is het belangrijk om een goed zicht te hebben op de basis waarop het gebouwd is. Zo worden eerst een aantal belangrijke begrippen en technieken besproken, deze sectie kan overgeslagen worden als deze informatie triviaal is voor de lezer. De automatisatie hiervan wordt onderzocht, welke technieken worden met elkaar gecombineerd en hoe bekom je uiteindelijk resultaten. Het is nodig om de theoretische benadering goed te begrijpen om uiteindelijk te kunnen beslissen als het resultaat van het experiment voldoet aan de normen van een goed werkend model. Tot slot worden de beschikbare cloud platformen besproken en vergeleken met een open source library, AutoKeras, dat gebaseerd is op de populaire neurale netwerklibrary, Keras. 
+Dit onderzoek richt zich op automatische \textit{machine learning} platformen. Maar alvorens van start te gaan met de onderliggende technieken is het belangrijk om een goed zicht te hebben op de basis waarop het gebouwd is. Zo worden eerst een aantal belangrijke begrippen en technieken besproken, deze sectie kan overgeslagen worden als deze intro triviaal is voor de lezer. De automatisatie hiervan wordt onderzocht, welke technieken worden met elkaar gecombineerd en hoe bekom je uiteindelijk resultaten. Het is nodig om de theoretische benadering goed te begrijpen om uiteindelijk te kunnen beslissen als het resultaat van het experiment voldoet aan de normen van een goed werkend model. Tot slot worden de beschikbare cloud platformen besproken en vergeleken met een open source libraries als alternatief.
 
 \section{Inleiding machine learning}
 \label{sec:inl-machine-learning}
@@ -19,7 +19,6 @@ Het is belangrijk dat volgende begrippen gekend zijn:
     \item \textbf{Data Cleaning / Cleansing}: Het detecteren, corrigeren of verwijderen van onnauwkeurige datarecords. Het resultaat is een consistente dataset die bruikbaar is om een model te trainen.
     \item \textbf{Feature Selection}: Het selecteren van relevante kolommen uit de dataset. Het zijn de belangrijkste eigenschappen die de voorspelling bepalen.
     \item \textbf{Software agent}: Een computerprogramma die in staat is om te leren uit eerdere ervaringen.
-    \item \textbf{Neuraal netwerk}: 
 \end{itemize}
 
 \subsection{Soorten machine learning}
@@ -186,7 +185,12 @@ Zoals veel Google producten, heeft Cloud AutoML een familiaire interface die een
 
 De beschikbare API's in de cloud worden aangesproken door HTTP requests te sturen naar de server. Een andere manier is via \textit{Client libraries\footnote{Enkel beschikbaar voor: C\#, Go, Java, Node, PHP, Python en Ruby \autocite{GoogleCLV2020}.}} die geïntegreerd worden in de code \autocite{GoogleCL2020}. De interfaces bevatten voorbeeldcode die (na setup van application keys) direct bruikbaar is om datasets en modellen te managen, modellen evalueren en (batch) voorspellingen te maken \autocite{GoogleCLV2020}. Voorspellingen van HTTP requests worden terug gestuurd als JSON, \textit{Client libraries} geven objecten in de gekozen programmeertaal met alle informatie terug.
 
+\subsection{Microsoft Azure ML Studio}
+\label{subsec:ml-studio}
 
+Zoals bij Google Cloud AutoML zijn er ook twee manieren om aan de slag te gaan. De interface op Azure of met de Azure SDK. De \textit{client library} is enkel beschikbaar voor Python maar de werking is gelijkaardig aan sectie \ref{subsubsec:client-library} \autocite{Microsoft2020}.
+
+\textcite{fusi2017} is de grondslag voor Azure ML Studio, het achterliggende systeem gebruikt \textit{bayesian optimization} en leunt aan bij technieken die besproken zijn in \textcite{Feurer2015}. Het bekomt een resultaat door \textit{collaborative filtering} te verwerken in \textit{hyperparameter tuning}. Hierbij wordt een voorspelling gemaakt op basis van informatie die verkregen is van een vorig getraind model die gelijkaardige keuzes vertoont. De verzamelde en geregulariseerde gegevens worden in een matrix gegoten\footnote{Deze techniek word \textit{matrix factorization} genoemd.} en kan zo gebruikt worden door het model.
 
 \subsection{AutoKeras}
 \label{subsec:autokeras}
@@ -195,7 +199,7 @@ Een AutoML systeem gebaseerd op Keras. De bedoeling van deze library is om machi
 
 Voor de Image Classifier is het voorbeeld uitgewerkt met de MNIST Hand-Written Digits, zowat de standaard dataset voor afbeeldingsherkenning. Het bevat 70000 afbeeldingen van handgeschreven letters die voorzichtig opgeschoond zijn om te gebruiken als test. Ze worden vaak gebruikt bij het schrijven van de algoritmes om verbeteringen te verifiëren. Het gevolg hiervan is dat de behaalde nauwkeurigheid niet per se representatief is op realistische voorbeelden waar afbeeldingen verschillende resoluties, kleur-schalen en aspect-ratios kunnen hebben.
 
-Het is aangewezen om het model te trainen op een machine met een externe grafische kaart die ondersteund wordt door de NVIDIA CUDA Toolkit.
+Achterliggend gebruikt het \textit{Neural Architecture Search} en het is aangewezen om het model te trainen op een machine met een externe grafische kaart die ondersteund wordt door de NVIDIA CUDA Toolkit.
 
 \subsection{Auto-sklearn en TPOT}
 \label{subsec:autosk}
@@ -209,7 +213,6 @@ Auto-sklearn is een open-source library die gebruik maakt van Bayesian optimizat
 \end{itemize}
 
 Het gegeneraliseerde proces kan gebruikt worden om algoritmes, \textit{pre-processing} methodes en hyperparameters te selecteren.
- 
 
 \subsubsection{Tree-based Pipeline Optimization Tool}
 
