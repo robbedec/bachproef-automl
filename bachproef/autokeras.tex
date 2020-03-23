@@ -22,12 +22,12 @@ Volgende \textit{packages} moeten zelf geïnstalleerd worden:
 Het verloop van de code is ook hoe je een model van nul kan trainen. Er wordt gewerkt met een \textit{CUDA integrated GPU}, om te testen als \textit{tensorflow} wel echt de GPU gebruikt kunnen er enkele commando's uitgevoerd worden. Als in de output een vermelding over de GPU staat mag u er vanuit gaan dat de die actief is.
 
 \begin{python}
-    from tensorflow.python.client import device_lib
-    
-    def get_available_devices():
-        local_device_protos = device_lib.list_local_devices()
-        return [x.name for x in local_device_protos]
-    print(get_available_devices()) 
+from tensorflow.python.client import device_lib
+
+def get_available_devices():
+    local_device_protos = device_lib.list_local_devices()
+    return [x.name for x in local_device_protos]
+print(get_available_devices()) 
 \end{python}
 
 Een mogelijkse output kan er als volgt uitzien: ['/device:CPU:0', '/device:GPU:0'].
