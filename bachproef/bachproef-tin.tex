@@ -9,6 +9,7 @@
 \usepackage[final]{pdfpages}
 \usepackage{subcaption}
 \usepackage{array}
+\usepackage{pythonhighlight}
 
 \newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
 \newcolumntype{M}[1]{>{\centering\arraybackslash}m{#1}}
@@ -133,21 +134,7 @@ Het onderwerp van deze bachelorproef is gebaseerd op een onderzoeksvoorstel dat 
 
 \chapter{Code Google Cloud AutoML}
 
-\chapter{Code AutoKeras}
-
-\includepdf[
-%% Include all pages of the PDF
-pages=-,
-%% make this page have the usual page style
-%% (you can change it to plain etc). By default pdfpages
-%% sets the pagecommand to \pagestyle{empty}
-pagecommand={\pagestyle{empty}},  
-%% Add a "section" entry to the ToC with the heading
-%% "Quilling Shapes" and the label "sec:shapes"
-addtotoc={1,section,1, Trainen met AutoKeras,sec:autokeras}]
-%% The pdf file itself
-{./nbconvert/autokeras.pdf}
-
+\input{appendix-autokeras}
 
 
 %%---------- Referentielijst --------------------------------------------------
