@@ -188,6 +188,7 @@ for axes, item in zip(axes.ravel(), incorrect_predictions):
 plt.tight_layout()
 \end{python}
 
+Het resultaat van deze code is te zien in afbeelding \ref{fig:wrong-prediction-autokeras-5} en \ref{fig:wrong-prediction-autokeras-10}.
 
 \subsection{Overzicht van de lagen}
 \label{subsec:model-overview}
@@ -227,11 +228,14 @@ Non-trainable params: 3
 _________________________________________________________________
 \end{python}
 
-Het overzicht kan ook geëxporteerd worden naar een afbeelding die beter geformatteerd is. Afbeelding \ref{fig:layer-autokeras} is hier een voorbeeld van.
+Het overzicht kan ook geëxporteerd worden naar een afbeelding die beter geformatteerd is. De geëxporteerde afbeeldingen bevinden zich in appendix \ref{ch:app:autokeras}.
 
 \section{Resultaten}
 \label{sec:results-autokeras}
 
+Zoals eerder vermeld zijn er 2 modellen getraind met als enigste configuratieverschil, het maximum aantal pogingen. In andere woorden is dit het aantal verschillende Keras modellen dat aangemaakt mag worden. De resultaten van beide zijn samengevat in tabel \ref{table:autokeras-results}.
+
+Verder worden beide modellen vermeld als model A (max. 5 pogingen) en model B (max. 10 pogingen).
 
 \begin{table}[ht]
     \centering
@@ -249,8 +253,16 @@ Het overzicht kan ook geëxporteerd worden naar een afbeelding die beter geforma
     \label{table:autokeras-results}
 \end{table}
 
-
 \begin{figure}
+    \centering
+    \includegraphics[width=\linewidth]{img/autokeras-overfit.png}
+    \caption{Het model expres \textit{overfitten} in het kader van \textit{ensemble construction}.}
+    \label{fig:autokeras-overfit}
+\end{figure}
+
+Wat meteen opvalt is dat een hoger aantal pogingen geen zekerheid is op betere prestaties. Er wordt zo enkel de mogelijkheid gegeven op een uitgebreidere exploratie van de zoekruimte. Zo kan het algoritme bijvoorbeeld een extreem \textit{overfitted} model trainen in de hoop om die later te combineren met een andere om tot een beter resultaat te bekomen, een toepassing van \textit{ensemble construction} (zie sectie \ref{subsec:ensemble-construction}). Afbeelding \ref{fig:autokeras-overfit} komt rechtstreeks uit de output van model B en is niet te vinden in model A.
+
+\begin{figure}[b!]
     \begin{subfigure}{0.5\textwidth}
         \centering
         \includegraphics[width=0.8\linewidth]{img/autokeras-5-confusion.png}
@@ -267,18 +279,28 @@ Het overzicht kan ook geëxporteerd worden naar een afbeelding die beter geforma
     \label{fig:confusion-matrices-autokeras}
 \end{figure}
 
+De \textit{confusion matrices} in afbeelding \ref{fig:confusion-matrices-autokeras} tonen dat verspreiding van voorspellingen in beide gevallen redelijk overeen komt. Er is te zien dat model B meer aanleunt (en dus meer fouten maakt in die categorie) om kat te voorspellen dan hond, iets dat in model A in evenwicht is.
+
 \begin{figure}
     \centering
-    \includegraphics[width=0.7\linewidth]{img/model-samenvatting.png}
-    \caption{Mogelijke lagenstructuur van een model.}
-    \label{fig:layer-autokeras}
+    \includegraphics[width=\linewidth]{img/autokeras-5-wrong-images.png}
+    \caption{Verkeerd voorspelde afbeeldingen van model A.}
+    \label{fig:wrong-prediction-autokeras-5}
 \end{figure}
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.7\linewidth]{img/autokeras-5-wrong-images.png}
-    \caption{Verkeerd voorspelde afbeeldingen.}
-    \label{fig:wrong-prediction-autokeras}
+    \includegraphics[width=\linewidth]{img/autokeras-10-wrong-images.png}
+    \caption{Verkeerd voorspelde afbeeldingen van model B.}
+    \label{fig:wrong-prediction-autokeras-10}
 \end{figure}
+
+Van beide modellen zijn 24 verkeerd voorspelde afbeeldingen gevisualiseerd. Bij sommige afbeelding kan duidelijk afgeleid worden wat de oorzaak is, mensen of andere onbekende objecten op de foto's. Andere zijn moeilijker te verklaren. Voor nu kan er besloten worden dat het model waarschijnlijk moeite heeft met de gespitste oren. Een typisch kenmerk van katten maar het komt soms ook voor bij honden. Maar ook het feit dat soms het volledige lichaam afgebeeld is en soms maar een deel van het hoofd.
+
+Met een gemiddelde score van 82\% bekomen we een goed resultaat als er rekening gehouden wordt met de beperkte hoeveelheid \textit{data preprocessing}. Om dit op productie niveau te krijgen moet er wel meer moeite gedaan worden om de trainingsdataset beter te verwerken. Handgemaakte modellen uit de competitie behalen scores tot 98\%\footnote{\url{https://www.kaggle.com/c/dogs-vs-cats/leaderboard}}.
+
+Voor een open-source library zit er zeker potentieel in voor de toekomst als u weet dat op een gelijkaardig niveau van \textit{preprocessing} en dezelfde dataset, een pre-release versie van AutoKeras slechts 67\% behaalde \autocite{Chopra2019}.
+
+
 
 \section{Requirements}
