@@ -9,6 +9,8 @@ In dit hoofdstuk wordt het volledige AutoKeras proces uitgelegd. Dit door belang
 
 De ontwikkeling is volledig in \textit{Jupyter notebooks}\footnote{\url{https://jupyter.org/}} uitgewerkt. Om de code makkelijk lokaal te gebruiken is \textit{Anaconda Navigator\footnote{\url{https://docs.anaconda.com/anaconda/navigator/}}} aangeraden, de meeste \textit{packages} worden standaard mee geïnstalleerd. De code bevindt zich ook in Appendix \ref{ch:app:autokeras} en kan online bekeken worden\footnote{\url{https://github.com/robbedec/bachproef-automl}}.
 
+Het is ook mogelijk om de notebook in de cloud uit te voeren. De dataset (omgezet naar een numpy array) en de notebooks kunnen direct geüpload worden naar Google Colab of Kaggle. De gebruiker heeft dan voor een bepaalde duur gratis toegang tot grafische kaarten.
+
 Volgende \textit{packages} moeten zelf geïnstalleerd worden:
 
 \begin{itemize}
@@ -41,7 +43,9 @@ Een mogelijkse output kan er als volgt uitzien: ['/device:CPU:0', '/device:GPU:0
 \subsection{Data transformatie}
 \label{subsec:autokeras-tranform}
 
-De dataset bestaat deels uit een gelabeld afbeeldingen. Het bevat ook een verzameling ongelabelde afbeeldingen die tijdens de wedstrijd gebruikt werden als verificatie. In het kader van het onderzoek kan dit weggelaten worden en kunnen we aan de slag gaan met de gelabelde data. Elke afbeelding wordt genormaliseerd naar een standaard resolutie en omgezet naar een \textit{numpy array}\footnote{In de code is 'np' een verwijzing naar \textit{numpy}}. Dit zijn de kleurwaarden van elke pixel die samen een matrix vormen. Ook het label van de afbeelding is opgenomen in de matrix (0 = hond, 1 = kat). Momenteel staat alle data nog gegroepeerd volgens categorie. Voor de volgende stap is het belangrijk dat dit niet het geval is. Daarom wordt de matrix nog eens random gesorteerd.
+De dataset bestaat deels uit een gelabelde afbeeldingen. Het bevat ook een verzameling ongelabelde afbeeldingen die tijdens de wedstrijd gebruikt werden als verificatie. In het kader van het onderzoek kunnen deze weggelaten worden en gaan we aan de slag met de gelabelde data. Elke afbeelding wordt genormaliseerd naar een standaard resolutie en omgezet naar een \textit{numpy array}\footnote{In de code is 'np' een verwijzing naar \textit{numpy}}. Dit zijn de kleurwaarden van elke pixel die samen een matrix vormen. Ook het label van de afbeelding is opgenomen in de matrix (0 = hond, 1 = kat). Momenteel staat alle data nog gegroepeerd volgens categorie. Voor de volgende stap is het belangrijk dat dit niet het geval is. Daarom wordt de matrix nog eens random gesorteerd.
+
+Om consistentie tussen de experimenten te behouden wordt de matrix opgeslagen en bij een nieuwe configuratie terug ingeladen. De data transformatie wordt zo één maal uitgevoerd.
 
 \bigskip
 
@@ -64,7 +68,8 @@ def get_data():
         data.append([np.asarray(img),np.array(label_vector)])
         
     shuffle(data)
-    return data
+    return data
+
 \end{python}
 
 \section{Data preprocessing}
@@ -94,7 +99,7 @@ x_test /= 255
 
 Met alle voorbereiding afgewerkt is het tijd om \textit{classifier} in gang te steken. Hierbij moet enkel een naam (voor het uiteindelijke model) en het maximum aantal pogingen meegegeven worden. Op voorhand kan er niet ingesteld worden hoe lang er gezocht mag worden. Het is wel mogelijk dat het vroegtijdig geëindigd wordt (voor max. aantal pogingen bereikt is) omdat de \text{loss value} niet genoeg zakt over x-aantal iteraties.
 
-Met de \pyth{clf.fit()} methode wordt het best passend model gekozen. Met de validatie dataset kan uiteindelijk de performantie van het model gemeten worden. \pyth{clf.evaluate()} geeft twee scores terug. Eerst de \textit{loss value}, het is een interpretatie die kijkt hoe goed het model scoort door training en validatie data te nemen. Let wel op dat de validatie dataset die wij definiëren enkel gebruikt wordt als \pyth{clf.fit()} gebruikt wordt. AutoKeras neemt van de trainings dataset standaard 20\% om te gebruiken als interne validatie tijdens het trainen. De tweede waarde is het percentage van correct voorspelde afbeeldingen.
+Met de \pyth{clf.fit()} methode wordt het best passend model gekozen. Met de validatie dataset kan uiteindelijk de performantie van het model gemeten worden. \pyth{clf.evaluate()} geeft twee scores terug. Eerst de \textit{loss value}, het is een interpretatie die kijkt hoe goed het model scoort door training en validatie data te nemen. Let wel op dat de validatie dataset die wij definiëren enkel gebruikt wordt als \pyth{clf.evaluate()} uitgevoerd wordt. AutoKeras neemt van de trainings dataset standaard 20\% om te gebruiken als interne validatie tijdens het trainen. De tweede waarde is het percentage van correct voorspelde afbeeldingen.
 
 \bigskip
 
@@ -103,6 +108,23 @@ clf = ak.ImageClassifier(max_trials=MAX_TRIES, name=OUTPUT_NAME)
 clf.fit(x_train,y_train, verbose=2)
 
 score = clf.evaluate(x_test, y_test)
+\end{python}
+
+Momenteel zit er een bug in het \textit{greedy} optimalisatie algoritme van AutoKeras waardoor \textit{classifiers} met een max. aantal pogingen > 5 vroegtijdig beëindigd worden. Een voorlopige oplossing is om een de API van Automodel te gebruiken en zelf de instellingen te configureren. Achterliggend gebeurt dit ook als \pyth{ak.ImageClassifier()} geïnitialiseerd wordt. Als vervanging is er gekozen om \textit{random search} te gebruiken (zie sectie \ref{sec:hyperparameter-tuning}).
+
+\bigskip
+
+\begin{python}
+clf = ak.AutoModel(
+    inputs=[ak.ImageInput()], 
+    outputs=[ak.ClassificationHead()], 
+    tuner="random",
+    max_trials=MAX_TRIES, 
+    name=OUTPUT_NAME,
+    overwrite=False
+    )
+    
+clf.fit(x_train, y_train, verbose=2)
 \end{python}
 
 \section{Model visualisatie}
@@ -129,7 +151,42 @@ plt.ylabel('predicted category')
 
 
 \subsection{Verkeerde voorspellingen}
+\label{subsec:wrong-predictions}
 
+Om inzicht te krijgen in de verkeerde voorspellingen is het handig om die terug als afbeeldingen te tonen. Het kan een manier zijn om als persoon een patroon te vinden waartegen het model fouten maakt. Het zo gezegde ruis op de afbeeldingen. 
+
+De eerste stap om voorspellingen op te splitsen is het interpreteren van de waarden. Zo krijg je bij een binair classificatieprobleem altijd een getal tussen 0 en 1 terug. Het kantelpunt is dan $\frac{1}{2}$, elke voorspelling die kleiner is wordt geclassificeerd als klasse 0 en alles groter als klasse 1. Om elke verkeerde voorspelling te zoeken kunnen we simpelweg het resultaat afronden en vergelijken met het bijhorend label.
+
+\bigskip
+
+\begin{python}
+images = x_test.reshape(5000,64, 64)
+incorrect_predictions = []
+
+for i in range(0, len(predictions)):
+    if predictions[i].round() != y_test[i]:
+        incorrect_predictions.append(
+            (i, images[i], predictions[i].round(4), y_test[i]))
+\end{python}
+
+In sectie \ref{sec:preprocessing-autokeras} zijn alle afbeeldingen omgezet naar grijswaarden. Als deze nu opnieuw geconverteerd worden zijn ze uiteraard zwart-wit foto's. Bij elke afbeelding wordt nog een legende gegenereerd. Zo is duidelijk te zien wat de index van de afbeelding is, wat de voorspelling van het model is (afgerond tot vier cijfers) en de werkelijke waarde.
+
+\bigskip
+
+\begin{python}
+%matplotlib inline
+
+figure, axes = plt.subplots(nrows=6, ncols=4, figsize=(16,16))
+
+for axes, item in zip(axes.ravel(), incorrect_predictions):
+    index, image, predicted, expected = item
+    axes.imshow(image, cmap=plt.cm.gray_r)
+    axes.set_xticks([])
+    axes.set_yticks([])
+    axes.set_title(f'index: {index}\np: {predicted}; e: {expected}')
+    
+plt.tight_layout()
+\end{python}
 
 
 \subsection{Overzicht van de lagen}
@@ -180,36 +237,33 @@ Het overzicht kan ook geëxporteerd worden naar een afbeelding die beter geforma
     \centering
     \begin{tabular}{c c c c c c} % centered columns (4 columns)
         \hline\hline %inserts double horizontal lines
-        Max aantal pogingen & Accuracy & Loss & Trainingsduur & Aantal lagen & Aantal parameters \\ [0.5ex] % inserts table
+        Max aantal pogingen & Accuracy & Loss & Trainingsduur & Aantal lagen \\ [0.5ex] % inserts table
         %heading
         \hline % inserts single horizontal line
-        5   & 82.74\%   & 0.6383   & 2u    & 10    & 76.420 \\ 
+        5   & 82.74\%   & 0.6383   & 2u    & 10 \\ 
         \hline %inserts single line
+        10   & 81.37\%   & 0.7110   & 8u    & 10 \\ 
+        \hline
     \end{tabular}
     \caption{Resultaten AutoKeras}
     \label{table:autokeras-results}
-\end{table}
+\end{table}
+
 
 \begin{figure}
     \begin{subfigure}{0.5\textwidth}
         \centering
         \includegraphics[width=0.8\linewidth]{img/autokeras-5-confusion.png}
-        \caption{Confusion matrix.}
+        \caption{Max. pogingen = 5}
         \label{fig:confusion-autokeras-5}
     \end{subfigure}
     \begin{subfigure}{0.5\textwidth}
         \centering
-        \includegraphics[width=0.8\linewidth]{img/autokeras-5-confusion.png}
-        \caption{Confusion matrix.}
+        \includegraphics[width=0.8\linewidth]{img/autokeras-10-confusion.png}
+        \caption{Max. pogingen = 10}
         \label{fig:confusion-autokeras-10}
     \end{subfigure}
-    \begin{subfigure}{0.5\textwidth}
-        \centering
-        \includegraphics[width=0.8\linewidth]{img/autokeras-5-confusion.png}
-        \caption{Confusion matrix.}
-        \label{fig:confusion-autokeras-50}
-    \end{subfigure}
-    \caption{Confusion matrices voor de verschillende modellen.}
+    \caption{Overzicht confusion matrices}
     \label{fig:confusion-matrices-autokeras}
 \end{figure}
 
