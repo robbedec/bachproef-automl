@@ -49,7 +49,8 @@ for (dict_key, files_list) in files_dict.items():
             continue # don't include non-photos
             
         label = dict_key
-        data_array.append((base_gcs_path + dict_key + '/' + filename , label))
+        data_array.append((base_gcs_path + dict_key + '/' + filename , label))
+
 \end{python}
 
 Nu moet \pyth{data_array} enkel nog ingeladen worden in een \textit{pandas dataframe}. In de \textit{pandas library} zit een functie die een dataframe kan opslaan als een csv bestand. Merk op dat de indexes van de kolommen en rijen niet mee opgeslagen worden. Deze kunnen als \pyth{False} geflagged worden in de functie.
@@ -62,7 +63,8 @@ gs://rdc-automl-catsvsdogs/dog/dog.100.jpg dog \\
 gs://rdc-automl-catsvsdogs/dog/dog.1000.jpg dog \\
 … … … \\
 gs://rdc-automl-catsvsdogs/cat/cat.9995.jpg cat \\
-gs://rdc-automl-catsvsdogs/cat/cat.9996.jpg cat\\
+gs://rdc-automl-catsvsdogs/cat/cat.9996.jpg cat
+\\
 
 Het csv bestand moet dan ook toegevoegd worden aan de bucket.
 
@@ -137,3 +139,83 @@ Als een model gedeployed is, wordt er standaard een REST service aangemaakt. De 
 
 \section{Requirements}
 \label{sec:google-requirements}
+
+\subsection{Functionele requirements}
+\label{subsec:google-fr}
+
+\subsubsection{Implementatie van het procesmodel}
+\label{sucsubsec:google-fr-procesmodel}
+
+Het platform gaat elke stap verwerken voor de gebruiker, het gaat hier over het overzicht van \ref{fig:proces-model.png}. Aan de hand van een drag en drop systeem wordt alles automatisch uitgevoerd. Enkel de data upload naar de cloud moet zelf gebeuren.
+
+\subsubsection{Beschikbare metrics}
+\label{sucsubsec:google-fr-metrics}
+
+Na het trainen van het model krijgt de gebruiker een beknopt maar duidelijk overzicht. Naast het aantal afbeeldingen waarmee het model getraind en getest is, wordt ook de \textit{precision} en \textit{recall} getoond. Om deze begrippen te snappen is het belangrijk dat deze termen gekend zijn. \textit{True positives} (TP) is het aantal juiste voorspellingen, de \textit{false negatives} (FN) is het aantal voorspellingen die verkeerd geclassificeerd worden in het standpunt van één klasse. Beide worden in procent uitgedrukt.
+
+De \textit{precision} is dan de verhouding correcte voorspellingen tegenover het totaal aantal voorspellingen van één enkele klasse.
+
+\begin{equation}
+    precision=\frac{TP}{TP+FP}
+\end{equation}
+
+\textit{Recall} is de verhouding tussen het aantal correct voorspelde afbeeldingen en het aantal afbeeldingen van die klasse die aanwezig is in de dataset.
+
+\begin{equation}
+    recall=\frac{TP}{TP+FN}
+\end{equation}
+
+Voorgaande begrippen zijn onderling verwerkt in de \textit{confusion matrix}, die ook gegenereerd wordt voor de gebruikte dataset.
+
+\subsubsection{Batch verwerking}
+\label{sucsubsec:google-fr-batch}
+
+Het aantal gekozen \textit{nodes} van een \textit{deployment} configuratie. Elke \textit{node} kan op zich 3.2 requests per seconde uitvoeren. Deze schalen lineair, tien \textit{nodes} kunnen dan 32 afbeeldingen per seconde verwerken.
+
+Voorspellingen kunnen ook in de Google Cloud Console gemaakt worden. De interface ondersteund een \textit{batch} van maximaal tien afbeeldingen. 
+
+Het aantal \textit{nodes} zijn vrij te configureren. De gebruiker beslist zelf de capaciteit die het model ondersteunt. Het is perfect mogelijk om in één job 100.000 afbeeldingen door te sturen.
+
+\subsection{Niet-functionele requirements}
+\label{subsec:googlautoml-nfr} 
+
+\subsubsection{Deployment}
+\label{sucsubsec:google-nfr-deployment}
+
+Met enkele klikken kan het volledig werken. De nodige infrastructuur wordt ook vrijgemaakt in Google Cloud. De bestaande oplossing kan makkelijk uitgebreid worden met bijvoorbeeld Redis.
+
+\subsubsection{Performantie}
+\label{sucsubsec:google-nfr-performantie}
+
+Op de gekozen dataset wordt een vergelijkbare score behaald als de top scores van de competitie waarvoor het gebruikt werd (98\%).
+
+\subsubsection{Kostprijs}
+\label{sucsubsec:google-nfr-price}
+
+\begin{table}
+    \centering
+    \begin{tabular}{||c c c||} 
+        \hline
+        Standard storage & Nearline storage & Coldline storage \\ [0.5ex] 
+        \hline\hline
+        \$0.026 & \$0.010 & \$0.007  \\ 
+        \hline
+    \end{tabular}
+    \caption{Maandelijke kostprijs per GB}
+    \label{table:google-storage-price}
+\end{table}
+
+Om de totale kostprijs te berekenen moet er toch rekening gehouden worden met een aantal zaken, merk op dat er mogelijks nog extra kosten bijkomen door nieuwe toepassingen te introduceren. In het algemeen kan de kostprijs opgedeeld worden in volgende groepen.
+
+Het opslaan van data op Google Cloud is in drie verschillende categorieën. Eerst de standaard data, die veel gebruikt wordt en veel aangepast wordt door de gebruiker. Met Nearline bedoelt men data die af en toe gelezen wordt maar weinig veranderlijk is. Coldline wordt dan gebruikt voor data die enkele malen per kwartaal aangepast wordt, de stap naar archive is niet zo groot als het om back-ups gaat. De prijs van elke soort staat in tabel \ref{table:google-storage-price}.
+
+Het trainen van het model wordt berekend aan de hand van het aantal \textit{node} uren. Elke \textit{node} op zich is een NVIDIA Tesla V100 GPU, die in een schakeling staan om optimaal te werken. Acht \textit{nodes} één uur laten werken staat gelijk aan acht trainingsuren. Per uur bedraagt de kost \$3.15. Een model uitbreiden door extra te laten trainen hanteert hetzelfde tarief.
+
+De \textit{deployment} kosten hangen dan ook weer af van het aantal \textit{nodes} die actief staan. Elk uur kost \textit{\$1.25} om één \textit{node} te gebruiken, om diezelfde één maand te gebruiken kost dat \$900.
+
+Een volledig overzicht van alle kosten binnen de \textit{vision} API is te vinden op de site van Google\footnote{\url{https://www.cloud.google.com/vision/automl/pricing}}.
+
+\subsubsection{Verwerking}
+\label{sucsubsec:google-nfr-verwerking}
+
+Er zijn verschillende manieren om het model te verwerken in een bestaande applicatie, zoals besproken in sectie \ref{sec:deployment}. Het gedeployde model is ook beschikbaar en werkt als een REST API. Een gebruiker kan dus in principe een \textit{wrapper} bouwen die alle \textit{requests} onderschept en doorstuurt naar Google Cloud. De client library zelf kan intern in het programma gebruikt worden (indien Python) anders kan een applicatie ook \textit{requests} sturen aan de hand van een Python script. 
