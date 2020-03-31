@@ -309,11 +309,23 @@ Voor een open-source library zit er zeker potentieel in voor de toekomst als u w
 \subsubsection{Implementatie van het procesmodel}
 \label{sucsubsec:autokeras-fr-procesmodel}
 
+Er is geen sprake van een volledige implementatie. Als open source project dient het in de eerste plaats als een onderzoeksproject. AutoKeras is simpelweg hun contributie aan de \textit{state of the art}. Niet commercieel onderzoek heeft weinig last van economische druk waardoor nieuwe \textit{features} soms lang op zich laten wachten. 
+
+Bij AutoKeras moet \textit{data preprocessing} zelf uitgevoerd worden. De optimalisatiealgoritmen gaan zelf de belangrijke \textit{features} zoeken en selecteren. Dit houdt in dat de data getransformeerd moet worden (numpy array in de juiste dimensies), opgesplitst en aangepast volgens de intenties van de gebruiker vooraleer het gebruikt kan worden door \pyth{ImageClassifier()}.
+
 \subsubsection{Beschikbare metrics}
 \label{sucsubsec:autokeras-fr-metrics}
 
+De output van het algoritme wordt geëxporteerd naar een gecompileerd Keras model, onderling gebruikt het ook Keras lagen. Dit wil zeggen dat alle mogelijke visualisaties van Keras perfect mogelijk zijn met de output. In het experiment gaat het dan vooral over \pyth{model.summary()} en gelijkaardige output die ons een inkijk in het resultaat geeft.
+
+Omdat de ruwe resultaten ook beschikbaar zijn, is de gebruiker vrij om andere \textit{packages} te gebruiken. Zo kan met een lijst voorspellingen een \textit{confusion matrix} gemaakt worden aan de hand van de scikit-learn \textit{library}. De array van grijswaarden kan ook terug omgezet worden naar afbeeldingen om bijvoorbeeld, verkeerde voorspellingen te tonen. Alle verschillende mogelijkheden zijn enkel begrensd door het aantal beschikbare \textit{packages}.
+
+Met de wiskundige formules kunnen ook allemaal verschillende statistieken berekend worden.
+
 \subsubsection{Batch verwerking}
 \label{sucsubsec:autokeras-fr-batch}
+
+Voor een AutoKeras \textit{classifier} bestaat op de \pyth{ImageClassifier.fit()} methode een \textit{batch\_size} argument die dit kan manipuleren. Deze optie bepaalt hoeveel afbeeldingen er bij elke iteratie gepropageerd worden door het model. Door \textit{mini batches} te gebruiken moeten niet alle afbeeldingen op hetzelfde moment in het geheugen van de computer geladen worden. Onderliggend gebeuren er meer updates aan de \textit{gradient} die tot betere resultaten kunnen leiden.
 
 \subsection{Niet-functionele requirements}
 \label{subsec:autokeras-nfr} 
@@ -321,11 +333,19 @@ Voor een open-source library zit er zeker potentieel in voor de toekomst als u w
 \subsubsection{Deployment}
 \label{sucsubsec:autokeras-nfr-deployment}
 
+Om een model online te krijgen is ook hier niet voorzien. Als gebruiker ben je zelf verantwoordelijk om de benodigde infrastructuur te voorzien. Ook zijn er mogelijks uitbreidingen nodig om de implementatie op productieniveau te krijgen. Meer informatie hierover in sectie \ref{sec:deployment}.
+
 \subsubsection{Performantie}
 \label{sucsubsec:autokeras-nfr-performantie}
+
+Het uiteindelijke resultaat in ons experiment is bruikbaar. Met 83\% is de technologie op zich bewezen. Betere resultaten hangen sterk af van de hoeveelheid en kwaliteit van de \textit{data preprocessing}.
 
 \subsubsection{Kostprijs}
 \label{sucsubsec:autokeras-nfr-price}
 
+Het gebruik van de \textit{library} zelf is volledig gratis. Ook voor het resultaat moet niet betaalt worden. Er moet zelf gekozen worden over welke investeringen gedaan worden in verband met de infrastructuur (aantal GPU's, kloksnelheid, elektriciteit ... ). Op zich kan een model getraind worden op een (gratis) online platform zoals Kaggle, of Google Colab. Om langere GPU tijden te verkrijgen kan een pro account aangeschaft worden.
+
 \subsubsection{Verwerking}
 \label{sucsubsec:autokeras-nfr-verwerking}
+
+Omdat de meeste \textit{wrappers} geschreven zijn in Python, is het een goede keuze om een eigen API mee te maken. Voor Flask zijn er online zeer veel \textit{tutorials} beschikbaar. Ook hierover is meer informatie te vinden in sectie \ref{sec:deployment}.
