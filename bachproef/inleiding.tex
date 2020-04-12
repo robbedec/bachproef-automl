@@ -5,17 +5,17 @@
 \chapter{\IfLanguageName{dutch}{Inleiding}{Introduction}}
 \label{ch:inleiding}
 
-Het informatie tijdperk centraliseert zich momenteel rond data. Bedrijven zien ook de toegevoegde waarde die het kan hebben in hun bedrijfsprocessen, kijk maar naar de grote spelers in de informaticawereld waar het begrip textit{Big Data} is ontstaan. In zijn ruwe vorm lijkt het op een gigantische hoop waaruit je niks kan leren, maar wanneer men deze gaat structureren zijn er plots allemaal nieuwe toepassingen beschikbaar. 
+Het informatie tijdperk centraliseert zich momenteel rond data. Bedrijven zien ook de toegevoegde waarde die het kan hebben in hun bedrijfsprocessen, kijk maar naar de grote spelers in de informaticawereld waar het begrip \textit{Big Data} is ontstaan. In zijn ruwe vorm lijkt het op een gigantische hoop waaruit je niks kan leren, maar wanneer men deze gaat structureren zijn er plots allemaal nieuwe toepassingen beschikbaar. 
 Eén van deze toepassingen die intensief gebruik maakt van data, is \textit{machine learning}. Hierbij wordt geprobeerd computers zaken aan te leren met behulp van een iteratief proces zonder expliciet geprogrammeerd te zijn voor de taken die ze uitvoeren. Mensen die goed overweg kunnen met de data om zo'n model te maken (Machine Learning Engineers / Data Scientists ...)  zijn vaak moeilijk te vinden. Een werkgever die zo'n probleem aan wilt pakken heeft enkele keuzes, AutoML is mogelijks een optie. Alhoewel het interesseveld ontstaan is in de jaren '50, is het nog maar sinds kort een hot topic met dank aan de grote hoeveelheid rekenkracht in moderne systemen en doorbraken\footnote{Denk maar aan \textit{open source} initiatieven zoals Tensorflow en Keras.} binnen het onderzoeksveld die de toegangsdrempel verlagen.
 
-Geautomatiseerde \textit{machine learning} platformen trachten een oplossing te bieden voor \textit{development} teams zonder een gespecialiseerde \textit{machine learning} expert. Het platform voert alle stappen van het proces uit en uiteindelijk moeten ze het enkel in hun product integreren. Deze manier van werken verlaagt niet alleen de druk op \textit{machine learning} experten maar het geeft hen ook de mogelijkheid om mee te werken aan uitdagende projecten of zelf onderzoek te voeren. Door de technische afhankelijkheid te verlagen kan de technologie sneller / meer gebruikt worden in bestaande projecten. Omdat bedrijven tot nu toe weinig contact hebben met AI en alles wat er toe behoort, zijn de meeste cases vergelijkbaar met elkaar. Zo heb je bijvoorbeeld binaire classificatie problemen, tekst analyse en meer. Waarom zou het dan niet mogelijk zijn om dit te automatiseren? 
+Geautomatiseerde \textit{machine learning} platformen trachten een oplossing te bieden voor \textit{development} teams zonder een gespecialiseerde \textit{machine learning} expert. Het platform voert alle stappen van het proces uit en uiteindelijk moeten ze het enkel in hun product integreren. Deze manier van werken verlaagt niet alleen de druk op \textit{machine learning} experten maar het geeft hen ook de mogelijkheid om mee te werken aan uitdagende projecten of zelf onderzoek uit te voeren. Door de technische afhankelijkheid te verlagen kan de technologie sneller / meer gebruikt worden in bestaande projecten. Omdat bedrijven tot nu toe weinig contact hebben met AI en alles wat er toe behoort, zijn de meeste cases vergelijkbaar met elkaar. Zo heb je bijvoorbeeld binaire classificatie problemen, tekst analyse en meer. Waarom zou het dan niet mogelijk zijn om dit te automatiseren? 
 
-In dit onderzoek wordt bekeken hoe laag de werkelijke instapdrempel ligt bij verschillende platformen (open-source en private oplossingen), alsook hoe zo'n model werkt en welke resultaten je bekomt voor een simpel maar realistisch classificatie probleem.
+Dit onderzoek bekeek hoe laag de werkelijke instapdrempel ligt bij verschillende platformen (open-source en private oplossingen), alsook hoe zo'n model werkt en welke resultaten je bekomt voor een simpel maar realistisch classificatie probleem.
 
 \section{\IfLanguageName{dutch}{Probleemstelling}{Problem Statement}}
 \label{sec:probleemstelling}
 
-Met een onschatbare hoeveelheid data die de dag van vandaag aanwezig is, is het belangrijk om deze op te schonen en features te selecteren zodat het gebruikt kan worden in een specifieke situatie. De hoeveelheid data groeit vele malen sneller dan het aantal beschikbare experten. Er moet dus naar een manier gezocht worden om \textit{machine learning} dichter bij de man te brengen zodat mensen met een uitgebreide kennis niet vast zitten met basis problemen die ze eerder al op een gelijkaardige manier opgelost hebben. Er wordt over basisproblemen gesproken in de zin dat bedrijven een eigen toepassing willen op een probleem dat al vele malen opgelost is in andere situaties. Hierbij zijn de stappen van het trainingsproces in grote lijnen gelijk.
+Met een onschatbare hoeveelheid data die de dag van vandaag aanwezig is, is het belangrijk om deze op te schonen en features te selecteren zodat het gebruikt kan worden in een specifieke situatie. De hoeveelheid data groeit vele malen sneller dan het aantal beschikbare experten. Er moet dus naar een manier gezocht worden om \textit{machine learning} dichter bij de man te brengen zodat mensen met een uitgebreide kennis niet vast zitten met basis problemen die ze eerder al op een gelijkaardige manier opgelost hebben. Er wordt over basisproblemen gesproken in de zin dat bedrijven een eigen toepassing willen op een probleem dat al eerder opgelost werd in andere situaties. Hierbij zijn de stappen van het trainingsproces in grote lijnen gelijk.
 
 Het is dan ook vanzelfsprekend dat er gezocht wordt naar een manier om dit te automatiseren, zoals in elke ander aspect van ons leven. Deze platformen kunnen mogelijks een oplossing bieden voor kleine zelf organiserende \textit{development} teams die graag een \textit{machine learning} aspect willen toevoegen aan hun project. Dit liefst met een minimale input van de ontwikkelaars.
 
@@ -25,15 +25,15 @@ Het is dan ook vanzelfsprekend dat er gezocht wordt naar een manier om dit te au
 \subsection{Hoofdonderzoeksvraag}
 \label{subsec:hoofdonderzoeksvraag}
 
-Met dit onderzoek wordt nagegaan als deze nieuwe technologie capabel is om triviale machine learning problemen op te lossen, al dan niet met minimale input van een developer. Het is duidelijk dat AutoML in zijn huidige staat niet klaar is voor uitdagende cases, maar het kan wel toegang geven tot nieuwe functies aan \textit{development} teams met weinig of geen \textit{machine learning} kennis.
+Met dit onderzoek werd nagegaan als deze nieuwe technologie capabel is om triviale machine learning problemen op te lossen, al dan niet met minimale input van een \textit{developer}. AutoML is een recente ontwikkeling waardoor het in zijn huidige staat waarschijnlijk niet klaar is voor uitdagende cases, maar het kan wel toegang geven tot nieuwe functies aan \textit{development} teams met weinig of geen \textit{machine learning} kennis.
 
 \subsection{Deelonderzoeksvragen}
 \label{subsec:deelonderzoeksvragen}
 
-Naast de hoofdonderzoeksvraag wordt er ook kort ingegaan en antwoord gegeven op:
+Naast de hoofdonderzoeksvraag komen ook volgende (kleinere) vragen aan bod:
 
 \begin{itemize}
-    \item Welke onderliggende technieken worden gebruikt bij geautomatiseerde machine learning.
+    \item Welke onderliggende technieken worden gebruikt bij geautomatiseerde \textit{machine learning}.
     \item Kies je best voor een open source library of toch een commercieel platform.
     \item Is de performantie van deze platformen vergelijkbaar met die van een traditioneel gebouwd model.
 \end{itemize}
@@ -41,11 +41,11 @@ Naast de hoofdonderzoeksvraag wordt er ook kort ingegaan en antwoord gegeven op:
 \section{\IfLanguageName{dutch}{Onderzoeksdoelstelling}{Research objective}}
 \label{sec:onderzoeksdoelstelling}
 
-De belangrijkste doelstelling van dit onderzoek is reproduceren van een realistische situatie die op de traditionele manier opgelost is, maar dan met \textit{automated machine learning}. Dit is mogelijk door de verschillende metrieken en performaties van de modellen met elkaar te vergelijken. We zien het experiment als geslaagd als de behaalde scores bij elkaar in de buurt liggen. Een werkend prototype is de eerste stap.
+De belangrijkste doelstelling van dit onderzoek is reproduceren van een realistische situatie die op de traditionele manier opgelost is, maar dan met \textit{automated machine learning}. Dit is mogelijk door de verschillende metrieken en performaties van de modellen met elkaar te vergelijken. Het experiment is geslaagd als de behaalde scores bij elkaar in de buurt liggen. Een werkend prototype is de eerste stap.
 
-Er zijn al verschillende mogelijkheden om dit te realiseren. Bij elke implementatie wordt dan ook getest hoeveel rekening er wordt gehouden met de belangrijkste aspecten\footnote{Aspecten die bepalen hoe bruikbaar de technologie is in de praktrijk} uit de \textit{requirements} analyse.
+Er zijn al verschillende mogelijkheden om dit te realiseren. Bij elke implementatie werd dan ook getest hoeveel rekening er wordt gehouden met de belangrijkste aspecten\footnote{Aspecten die bepalen hoe bruikbaar de technologie is in de praktrijk} uit de \textit{requirements} analyse.
 
-Aan de hand van de prototypes en de vergelijkende studie kan er een conclusie geschreven worden die rekening houdt met implementatie details en het standpunt van een bedrijf.
+Aan de hand van de prototypes en de vergelijkende studie is er een conclusie geschreven die rekening houdt met implementatie details en het standpunt van een bedrijf.
 
 \section{\IfLanguageName{dutch}{Opzet van deze bachelorproef}{Structure of this bachelor thesis}}
 \label{sec:opzet-bachelorproef}
@@ -60,6 +60,6 @@ In Hoofdstuk~\ref{ch:stand-van-zaken} wordt een overzicht gegeven van de stand v
 
 In Hoofdstuk~\ref{ch:methodologie} wordt de methodologie toegelicht en worden de gebruikte onderzoekstechnieken besproken om een antwoord te kunnen formuleren op de onderzoeksvragen.
 
-In Hoofdstuk~\ref{ch:autokeras} en \ref{ch:google-automl} wordt, respectievelijk, voor AutoKeras en Google Cloud AutoML een prototype opgezet en de \textit{requirements} besproken.
+In Hoofdstuk~\ref{ch:autokeras} en \ref{ch:google-automl} is voor, respectievelijk, AutoKeras en Google Cloud AutoML een prototype opgezet en de \textit{requirements} besproken.
 
 In Hoofdstuk~\ref{ch:conclusie}, tenslotte, wordt de conclusie gegeven en een antwoord geformuleerd op de onderzoeksvragen. Daarbij wordt ook een aanzet gegeven voor toekomstig onderzoek binnen dit domein.
