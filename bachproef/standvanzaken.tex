@@ -53,17 +53,16 @@ Een ongelabelde dataset met gegevens over klanten waarvoor je te weten wilt kome
     \item Klanten die voor een bepaalde aanbieding misschien hun contract verlengen.
 \end{itemize}
 
-Deze resultaten worden bekomen door berekeningen uit te voeren op de attribuutvector zonder een outputlabel. Deze techniek is, in het kader van dit onderzoek, minder relevant.
+Deze resultaten bekomt men door berekeningen uit te voeren op de attribuutvector zonder een outputlabel. Deze techniek is, in het kader van dit onderzoek, minder relevant.
 
 \subsubsection{Reinforcement Learning}
 \label{subsubsec:reinforcement-learning}
 
-Reinforcement learning focust zich op de acties die een software agent onderneemt om een zo hoog mogelijke beloning te krijgen. Er is dus geen nood aan een (gelabelde) dataset zoals bij gesuperviseerd en ongesuperviseerd leren. De agent probeert een balans te vinden tussen wat hij weet en wat er kan gebeuren \autocite{Kaelbling1996}. In essentie wil dit zeggen dat de agent probeert te leren welke acties leiden tot de hoogste totale beloning \autocite{Lievens2019}.
+\textit{Reinforcement learning} focust zich op de acties die een software agent onderneemt om een zo hoog mogelijke beloning te krijgen. Er is geen behoefte aan een dataset zoals bij gesuperviseerd en ongesuperviseerd leren omdat die zelf opgebouwd kan worden. De agent probeert een balans te vinden tussen wat hij weet en wat er kan gebeuren \autocite{Kaelbling1996}. In essentie wil dit zeggen dat de agent probeert te leren welke acties leiden tot de hoogste totale beloning \autocite{Lievens2019}.
 
-Deze techniek wordt verder besproken in het deel over geautomatiseerde machine learning.
+Deze techniek wordt verder besproken in het deel over geautomatiseerde \textit{machine learning}.
 
-
-Geautomatiseerde \textit{machine learning} is het automatiseren van het trainingsproces bij een artificieel neuraal netwerk. De lage toegangsdrempel zorgt ervoor dat mensen met beperkte \textit{machine learning }kennis sneller en simpeler een model kunnen trainen en gebruiken.
+In moeilijke situaties waarbij bijvoorbeeld de omgeving partieel observeerbaar is of tegen een tegenstander gespeeld wordt, kan \textit{reinforcement learning} een zet spelen waarvoor de opbrengst voor de tegenstander zo klein mogelijk is. De voorspelling is op basis van eerder geziene situaties en eigen kennis. Door zo te werk te gaan moeten niet alle mogelijke zetten en daaraanvolgende scenario's overlopen worden, wat praktisch onmogelijk is.
 
 \subsubsection{Transfer Learning}
 \label{subsubsec:transfer-learning}
@@ -74,9 +73,9 @@ Geautomatiseerde \textit{machine learning} is het automatiseren van het training
     \label{fig:transfer-learning}
 \end{figure}
 
-Een andere manier om een neuraal netwerk te trainen is eerst een gegeneraliseerd model maken en die later specifiek toepassen op de situatie waarin het zich bevindt. Het idee achter transfer learning komt hierop neer, een gegeneraliseerd model kan vormen, kleurveranderingen en hoeken herkennen. Door de laatste lagen van het model af te knippen en nieuwe meer gespecialiseerde lagen toevoegt, zeg je in principe welke soort van de opgesomde eigenschappen het moet herkennen \autocite{Khandelwal2019}. 
+Een andere manier om een neuraal netwerk te trainen is eerst een gegeneraliseerd model maken en die later specifiek toepassen op de situatie waarin het zich bevindt. Het idee achter \textit{transfer learning} komt hierop neer, een gegeneraliseerd model kan vormen, kleurveranderingen en hoeken herkennen. Door de laatste lagen van het model af te knippen en nieuwe meer gespecialiseerde lagen toe te voegen, zeg je in principe welke soort van de opgesomde eigenschappen het moet herkennen \autocite{Khandelwal2019}. 
 
-In figuur \ref{fig:transfer-learning} is zichtbaar hoe een traditioneel model verschilt van een model getraind met transfer learning. Voor verschillende taken hoeft het niet volledig opnieuw getraind worden (op voorwaarde dat het binnen de generalisatie valt) en kan je de laatste lagen fine-tunen naar wens. Zo kan een model getraind worden om voertuigen te herkennen en later gespecialiseerd worden naar bijvoorbeeld auto's, vrachtwagens, fietsen of moto's.
+In figuur \ref{fig:transfer-learning} is zichtbaar hoe een traditioneel model verschilt van een model getraind met \textit{transfer learning}. Voor verschillende taken hoeft het niet volledig opnieuw getraind worden (op voorwaarde dat het binnen de generalisatie valt) en kan je de laatste lagen \textit{fine-tunen} naar wens. Zo kan een model getraind worden om voertuigen te herkennen en later gespecialiseerd worden naar bijvoorbeeld auto's, vrachtwagens, fietsen of moto's.
 
 \section{Proces model bij data analyse}
 \label{sec:proces-model}
@@ -87,7 +86,7 @@ In figuur \ref{fig:transfer-learning} is zichtbaar hoe een traditioneel model ve
     \label{fig:proces-model.png}
 \end{figure}
 
-Volgens \textcite{Lemahieu2018} bestaat elk data analyse project uit 7 verschillende stappen, in de gegeven volgorde van figuur \ref{fig:proces-model.png}. Er wordt aangenomen dat 80-90\% van de totale tijd gespendeerd wordt aan \textit{preprocessing} van de data. Voordat een AutoML systeem bruikbaar is in de situatie van dit onderzoek moet het in staat zijn om de initiële stap uit te voeren. Het identificeren van het business probleem en de \textit{data sources} mogen al uitgesloten worden, de opdracht die een \textit{development} team krijgt bevat idealiter alle informatie. 
+Volgens \textcite{Lemahieu2018} bestaat elk data analyse project uit 7 verschillende stappen, in de gegeven volgorde van figuur \ref{fig:proces-model.png}. Er wordt aangenomen dat 80-90\% van de totale tijd gespendeerd wordt aan \textit{preprocessing} van de data. Voordat een AutoML systeem bruikbaar is in de situatie van dit onderzoek moet het in staat zijn om zo veel mogelijk stappen van figuur \ref{fig:proces-model.png} uit te voeren. Het identificeren van het business probleem en de \textit{data sources} mogen al uitgesloten worden, de opdracht die een \textit{development} team krijgt bevat idealiter alle informatie. 
 
 We zijn dus niet enkel op zoek naar een oplossing die analyses kan uitvoeren en interpreteren, maar ook naar iets dat data op een correcte manier kan behandelen zodat er een autonoom systeem gevormd wordt. 
 
@@ -100,23 +99,23 @@ We zijn dus niet enkel op zoek naar een oplossing die analyses kan uitvoeren en 
     \label{fig:nas-bp}
 \end{figure}
 
-Dergelijke geautomatiseerde machine learning systemen gebruiken een techniek die het ontwerp van een artificieel neuraal netwerk kan automatiseren, beter bekend als \textit{Neural Architecture Search} \autocite{Elsken2019}. De benaming verklapt al wat de kerntaak is, het zoeken naar de optimale netwerkarchitectuur optimaliseren. Uit \textcite{ZophL2016} wordt vastgesteld dat deze techniek een gelijkaardige of zelfs betere performantie heeft op een vaak gebruikte dataset dan modellen die door een ML-ingenieur ontworpen zijn.
+Dergelijke geautomatiseerde \textit{machine learning} systemen gebruiken een techniek die het ontwerp van een artificieel neuraal netwerk kan automatiseren, beter bekend als \textit{Neural Architecture Search} \autocite{Elsken2019}. De benaming verklapt al wat de kerntaak is, het zoeken naar de optimale netwerkarchitectuur optimaliseren. Uit \textcite{ZophL2016} wordt vastgesteld dat deze techniek een gelijkaardige of zelfs betere performantie heeft op een vaak gebruikte dataset dan modellen die door een ML-ingenieur ontworpen zijn.
 
 \textit{Neural Architecture Search} is een kostelijk algoritme om uit te voeren op een grote dataset. De verkregen resultaten uit \textcite{ZophL2016} hebben enkele weken geduurd met 800 GPU's. Daarom wordt er in \textcite{Zoph2017} voorgesteld om een model te trainen voor een (kleinere) proxy dataset en die aan de hand van \textit{transfer learning} te extraheren naar de volledige dataset. Door op voorhand een zoekruimte te definiëren is de complexiteit van de architectuur losstaand van de diepte van het model en de grootte van de afbeeldingen. Met andere woorden wordt er dus gezocht naar de beste lagenstructuur, want die blijven onveranderd bij het transfereren van het model. Deze aanpak komt veel sneller tot zijn resultaat want enkel de gewichten moeten aangepast worden.
 
-De technieken uit Sectie \ref{sec:hyperparameter-tuning} zijn onderliggend verwerkt en spelen een belangrijke rol binnen het domein van machine learning \autocite{ZophL2016}. \textit{Reinforcement Learning} is een populaire zoekstrategie maar andere zoek- en optimalisatiealgoritmen zoals bijvoorbeeld \textit{Bayesian optimization} zijn ook mogelijk \autocite{Elsken2019}.
+De technieken uit Sectie \ref{sec:hyperparameter-tuning} zijn onderliggend verwerkt en spelen een belangrijke rol binnen het domein van \textit{machine learning} \autocite{ZophL2016}. \textit{Reinforcement Learning} is een populaire zoekstrategie maar andere zoek- en optimalisatiealgoritmen zoals bijvoorbeeld \textit{Bayesian optimization} zijn ook mogelijk \autocite{Elsken2019}.
 
 \subsubsection{Gebruik van Reinforcement Learning}
 \label{subsubsec:nas-reinforcement}
 
-Neural Architecture Search gebruikt Reinforcement Learning om een model te trainen. Deze manier van werken is fundamenteel anders dan gesuperviseerd / ongesuperviseerd leren omdat het model niet beter wordt door het gebruik van datasets. Als alternatief kan het neuraal netwerk beloningssignalen herkennen waardoor het kan leren welke acties leiden tot een positief resultaat \autocite{Lievens2019}.
+\textit{Neural Architecture Search} gebruikt \textit{Reinforcement Learning} om een model te trainen. Deze manier van werken is fundamenteel anders dan gesuperviseerd / ongesuperviseerd leren omdat het model niet beter wordt door het gebruik van datasets. Als alternatief kan het neuraal netwerk beloningssignalen herkennen waardoor het kan leren welke acties leiden tot een positief resultaat \autocite{Lievens2019}.
 
 Op figuur \ref{fig:nas-bp} wordt gevisualiseerd hoe dit werkt. Op basis van controller structuur A (waarbij A een neuraal netwerk is) wordt een string met variabele lengte gegenereerd. Deze waarden worden gebruikt als hyperparameters om een kind-netwerk aan te maken, die getraind wordt met echte data en waarbij de accuraatheid gemeten wordt aan de hand van een validatie dataset. Het resultaat wordt gebruikt als beloningssignaal voor de controller, bij de volgende iteratie kan deze hogere kansen geven aan parameters die leiden tot accurate voorspellingen \autocite{ZophL2016}. De controller zijn zoekfunctie zal dus verbeteren over tijd.
 
 \subsubsection{Verbeteringen met Network Morphism}
 \label{subsubsec:network-morphism}
 
-In de tweede alinea van sectie \ref{sec:nas} is al gesproken over de grote hoeveelheid resources die nodig zijn om tot de voorgestelde resultaten te komen. De afhankelijkheid van die resources zorgt ervoor dat er geen praktische manier is om het systeem te gebruiken als die capaciteiten niet beschikbaar zijn \autocite{Cai2017}. \textcite{Cai2017} zegt dat het verlies in performantie komt omdat elk kind-netwerk volledig vanaf nul getraind wordt, zonder kennis te hebben van vorige bewandelde paden. De technologie is bewezen, de moeilijkheid bevindt zich nu in het reproduceren met minder rekenkracht.
+In de tweede alinea van sectie \ref{sec:nas} is al gesproken over de grote hoeveelheid resources die nodig zijn om tot de voorgestelde resultaten te komen. De afhankelijkheid van die \textit{resources} zorgt ervoor dat er geen praktische manier is om het systeem te gebruiken als die capaciteiten niet beschikbaar zijn \autocite{Cai2017}. \textcite{Cai2017} zegt dat het verlies in performantie komt omdat elk kind-netwerk volledig vanaf nul getraind wordt, zonder kennis te hebben van vorige bewandelde paden. De technologie is bewezen, de moeilijkheid bevindt zich nu in het reproduceren met minder rekenkracht.
 
 Denk maar aan hoe menselijke expertise tot stand komt. De herhalende taakt moet kennis opleveren over de gekozen gewichten, architectuur en meer \autocite{Chen2016}. Dit zonder telkens gereset te worden.
 
@@ -125,14 +124,14 @@ Denk maar aan hoe menselijke expertise tot stand komt. De herhalende taakt moet 
 \section{Hyperparameter tuning}
 \label{sec:hyperparameter-tuning}
 
-In de vorige sectie is het gebruik van parameters aan bod gekomen. Neural Architecture Search en Hyperparameter tuning zijn dan ook sterk gerelateerd aan elkaar. De normale parameters bepalen het gedrag van een neuraal netwerk en hebben een grote invloed op het eindresultaat. Het gegeven gewicht aan een parameter stelt, zoals eerder vermeld, hoe groot de invloed is van deze laag / neuron op de voorspelling. \textcite{GoogleHT2020} verduidelijkt dat Hyperparameters eigen zijn aan de configuratie en niet aan het model. Zo moet er bepaald worden hoeveel lagen en het aantal neuronen per laag er zijn. Tijdens het trainen blijven deze constant. Volgens \textcite{Brust2019} zijn er verschillende manieren om de hyperparameters te optimaliseren. \textit{Brute force} zal elke configuratie overlopen en beslissen hoe het model vordert terwijl \textit{feature selection} gewichten aan verschillende hyperparameters geeft. Op die manier hebben vorige simulaties een impact bij de selectie van een nieuwe set hyperparameters \autocite{Claesen2015}. In \textcite{Bergstra2011} wordt nog gesproken over \textit{Random Search} die in sommige gevallen dezelfde (slechte) performantie heeft als \textit{Brute force}, en de meer gesofisticeerde methodes die verder besproken worden. 
+In de vorige sectie is het gebruik van parameters aan bod gekomen. \textit{Neural Architecture Search} en \textit{Hyperparameter tuning} zijn dan ook sterk gerelateerd aan elkaar. De normale parameters bepalen het gedrag van een neuraal netwerk en hebben een grote invloed op het eindresultaat. Het gegeven gewicht aan een parameter stelt, zoals eerder vermeld, hoe groot de invloed is van deze laag / neuron op de voorspelling. \textcite{GoogleHT2020} verduidelijkt dat hyperparameters eigen zijn aan de configuratie en niet aan het model. Zo moet er bepaald worden hoeveel lagen en het aantal neuronen per laag er zijn. Tijdens het trainen blijven deze constant. Volgens \textcite{Brust2019} zijn er verschillende manieren om de hyperparameters te optimaliseren. \textit{Brute force} zal elke configuratie overlopen en beslissen hoe het model vordert terwijl \textit{feature selection} gewichten aan verschillende hyperparameters geeft. Op die manier hebben vorige simulaties een impact bij de selectie van een nieuwe set hyperparameters \autocite{Claesen2015}. In \textcite{Bergstra2011} wordt nog gesproken over \textit{Random Search} die in sommige gevallen dezelfde (slechte) performantie heeft als \textit{Brute force}, en de meer gesofisticeerde methodes die verder besproken worden. 
 
-\textcite{ZophL2016} stelt dat deze methoden in het algemeen minder goed werken dan Neural Architecture Search, dit is omdat de netwerk configuraties gevormd worden in een zoekruimte met vaste lengte. Bayesian optimization \autocite{Bergstra2013}, een variant van hyperparameter tuning, werkt wel met variabele zoekruimtes maar blijven minder flexibel dan wat er voorgesteld wordt bij Neural Architecture Search. In de praktijk bekomt men wel vaak een goed resultaat als er een initieel model bijgeleverd wordt \autocite{ZophL2016}.
+\textcite{ZophL2016} stelt dat deze methoden in het algemeen minder goed werken dan Neural Architecture Search, dit is omdat de netwerk configuraties gevormd worden in een zoekruimte met vaste lengte. Bayesian optimization \autocite{Bergstra2013}, een variant van \textit{hyperparameter tuning}, werkt wel met variabele zoekruimtes maar blijven minder flexibel dan wat er voorgesteld wordt bij \textit{Neural Architecture Search}. In de praktijk bekomt men wel vaak een goed resultaat als er een initieel model bijgeleverd wordt \autocite{ZophL2016}.
 
 \subsection{Meta-learning}
 \label{subsec:meta-learning}
 
-De principes achter de systemen die zelf leren en verbeteren komt uit \textcite{Schmid1987}. Het doel ervan is om aan de hand van randinformatie te begrijpen hoe leerproblemen flexibel worden. Die kennis kan verder ook gebruikt worden om herhalende taken te verbeteren over tijd \autocite{ZophL2016}. De typische benaming is 'leren leren'.
+De principes achter de systemen die zelf leren en verbeteren komen uit \textcite{Schmid1987}. Het doel ervan is om aan de hand van randinformatie te begrijpen hoe leerproblemen flexibel worden. Die kennis kan verder ook gebruikt worden om herhalende taken te verbeteren over tijd \autocite{ZophL2016}. De typische benaming is 'leren leren'.
 
 Randinformatie in deze situatie wordt ook metadata genoemd. Dit is niet meer dan informatie over andere data. Voorbeelden van metadata kunnen zijn: eigenschappen van het algoritme (\textit{metrics} die de performantie meten) of informatie over het probleem. In \textcite{Schmidhuber1993} wordt het principe getoond waarbij een zelf refererend neuraal netwerk zijn eigen gewichtenmatrix kan aanpassen. Een vaak gebruikt aanpassingsalgoritme is \textit{gradient descent} waarbij de principes van \textit{meta-learning} verwerkt worden.
 
@@ -140,14 +139,15 @@ Randinformatie in deze situatie wordt ook metadata genoemd. Dit is niet meer dan
 \label{subsec:ensemble-construction}
 
 \begin{figure}
-    \includegraphics[width=\linewidth]{img/Ozone.png}
+    \centering
+    \includegraphics[width=0.9\linewidth]{img/Ozone.png}
     \caption{De grijze lijnen zijn de voorspellingen van de verschillende algoritmen, de rode lijn is het resultaat van de \textit{ensemble}. Op de grafiek is te zien dat de uitkomst goed veralgemeniseerd is over de punten \autocite{Cen2016}.}
     \label{fig:ensemble-ozone}
 \end{figure}
 
 Met een \textit{ensemble} bedoelt men een verzameling van \textit{machine learning} algoritmes. Het gebruik van meerdere algoritmes die elkaar aanvullen leiden tot betere resultaten dan één enkel algoritme \autocite{Opitz1999}. Door de extra combinaties die nu gemaakt kunnen worden verhoogt de flexibiliteit. De simpelste manier waarop een ensemble kan werken is \textit{bagging\footnote{Ook gekend als \textit{bootstrap aggregating}.}}. Het laat elk algoritme een \textit{overfitted} voorspelling maken, de uiteindelijke uitkomst is dan het rekenkundig gemiddelde van elke voorspelling \autocite{Decorte2019}. 
 
-Zo kan je bij \textit{random forest}, een ensemble van zoekbomen, een willekeurige factor introduceren in het trainingsproces waardoor elke zoekboom een resultaat uitkomt dat net iets van elkaar verschilt. In \textcite{Decorte2019} zien we dat combineren van al deze resultaten de performantie van het finale model verhoogt zonder dat het \textit{overfitted} is aan de trainingsdataset.
+Zo kan je bij \textit{random forest}, een ensemble van zoekbomen, een willekeurige factor introduceren in het trainingsproces waardoor elke zoekboom een resultaat uitkomt dat net iets van elkaar verschilt. In \textcite{Decorte2019} zien we dat het combineren van al deze resultaten de performantie van het finale model verhoogt zonder dat het \textit{overfitted} is aan de trainingsdataset.
 
 In figuur \ref{fig:ensemble-ozone} is te zien hoe \textit{bagging} tot zijn resultaat komt.
 
