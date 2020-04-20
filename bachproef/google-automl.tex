@@ -71,18 +71,68 @@ Het csv bestand moet dan ook toegevoegd worden aan de bucket.
 \section{Model trainen en evalueren}
 \label{sec:google-automl-train}
 
-Om het trainen te starten moet nu enkel het csv bestand (dat op Google Cloud Storage) staat selecteren. Vervolgens worden alle afbeeldingen geïmporteerd en opgesplitst in training, validatie en testen. In ons geval van 25000 afbeeldingen worden ze als volgt opgesplitst.
+Om het trainen te starten moet nu enkel het csv bestand (dat op Google Cloud Storage) staat selecteren. Vervolgens worden alle afbeeldingen geïmporteerd en opgesplitst in training, validatie en testen. In ons geval van 22500 afbeeldingen worden ze als volgt opgesplitst.
 
 \begin{itemize}
     \item Training: 10000
     \item Validatie: 5000
-    \item Testen: 5000
+    \item Testen: 2500
 \end{itemize}
 
 Elke dataset is gelijk verdeeld over de twee categorieën. Als er dus over 10000 afbeeldingen gesproken worden, zijn het in feite 5000 katten en 5000 honden.
 
-\section{Model visualisatie}
-\label{sec:google-automl-visualisation}
+\section{Resultaten}
+\label{sec:google-automl-results}
+
+Het model behaalt een score van 99\% en komt zo overeen met de beste inzending van de Kaggle wedstrijd. De stelling van Google, om \textit{machine learning} makkelijk en toegankelijk te maken klopt dus. Met namelijk niks van \textit{preprocessing} of dergelijke scoort het toch uitstekend.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\linewidth]{img/google-automl-pred.png}
+    \caption{Vier 'onduidelijke' voorspelde afbeeldingen}
+    \label{fig:google-predictions}
+\end{figure}
+
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{c c c c} % centered columns (4 columns)
+        \hline\hline %inserts double horizontal lines
+        Afbeelding & Voorspelling & Zekerheid & Werkelijk label \\ [0.5ex] % inserts table
+        %heading
+        \hline % inserts single horizontal line
+        1   &  Hond  & 100\%   & Hond \\ 
+        \hline %inserts single line
+        2   &  Hond  & 66\%   & Hond \\ 
+        \hline
+        3   &  Hond  & 100\%   & Hond \\ 
+        \hline
+        4   &  Hond  & 97\%   & Kat \\ 
+        \hline
+    \end{tabular}
+    \caption{Vier voorspelde afbeeldingen in Google Cloud AutoML (Figuur \ref{fig:google-predictions})}
+    \label{table:google-predicted-images}
+\end{table}
+
+\begin{figure}
+    \begin{subfigure}{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.8\linewidth]{img/google-automl-performance1.png}
+        \caption{}
+        \label{fig:google-performance1}
+    \end{subfigure}
+    \begin{subfigure}{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.8\linewidth]{img/google-automl-performance12.png}
+        \caption{Confusion matrix}
+        \label{fig:google-performance2}
+    \end{subfigure}
+    \caption{Performantie van het model}
+    \label{fig:google-performance}
+\end{figure}
+
+Op de testdataset van 2500 afbeeldingen zijn er slechts negen verkeerde voorspellingen. De \textit{metrics} in afbeelding \ref{fig:google-performance} zijn wel de enigste feedback over het model. Zo is het niet mogelijk om verkeerd voorspelde afbeeldingen te filteren of de lagen van het model te bekijken.
+
+Om het model snel zelf eens te testen, werden er vier onduidelijke foto's (figuur \ref{fig:google-predictions}) voorspeld. Dit kan in de \textit{cloud interface} voor \textit{batches} van maximaal tien afbeeldingen. De resultaten van de voorspellingen staan in tabel \ref{table:google-predicted-images}.
 
 \section{Deployment}
 \label{sec:google-automl-deployment}
@@ -192,7 +242,7 @@ Op de gekozen dataset wordt een vergelijkbare score behaald als de top scores va
 \subsubsection{Kostprijs}
 \label{sucsubsec:google-nfr-price}
 
-\begin{table}
+\begin{table}[b!]
     \centering
     \begin{tabular}{||c c c||} 
         \hline
