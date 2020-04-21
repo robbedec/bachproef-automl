@@ -7,7 +7,7 @@
 
 % Pas na deze inleidende paragraaf komt de eerste sectiehoofding.
 
-Dit onderzoek richt zich op automatische \textit{machine learning} platformen. Maar alvorens van start te gaan met de onderliggende technieken is het belangrijk om een goed zicht te hebben op de basis waarop het gebouwd is. Zo worden eerst een aantal belangrijke begrippen en technieken besproken, deze sectie kan overgeslagen worden als deze intro triviaal is voor de lezer. De automatisatie hiervan wordt onderzocht, welke technieken zijn met elkaar gecombineerd en hoe bekom je uiteindelijk resultaten. Het is nodig om de theoretische benadering goed te begrijpen om uiteindelijk te kunnen beslissen als het resultaat van het experiment voldoet aan de normen van een goed werkend model. Tot slot worden de beschikbare cloud platformen besproken en vergeleken met een open source libraries als alternatief.
+Dit onderzoek richt zich op automatische \textit{machine learning} platformen. Maar alvorens van start te gaan met de onderliggende technieken is het belangrijk om een goed zicht te hebben op de basis waarop het gebouwd is. Zo zijn eerst een aantal belangrijke begrippen en technieken besproken, deze sectie kan overgeslagen worden als deze intro triviaal is voor de lezer. De automatisatie hiervan werd onderzocht, welke technieken zijn met elkaar gecombineerd en hoe bekom je uiteindelijk resultaten. Het is nodig om de theoretische benadering goed te begrijpen om uiteindelijk te kunnen beslissen als het resultaat van het experiment voldoet aan de normen van een goed werkend model. Tot slot werden de beschikbare cloud platformen besproken en vergeleken met een open source libraries als alternatief.
 
 \section{Inleiding machine learning}
 \label{sec:inl-machine-learning}
@@ -192,7 +192,7 @@ De beschikbare API's in de cloud worden aangesproken door HTTP requests te sture
 
 Zoals bij Google Cloud AutoML zijn er ook twee manieren om aan de slag te gaan. De interface op Azure of met de Azure SDK. De \textit{client library} is enkel beschikbaar voor Python maar de werking is gelijkaardig aan sectie \ref{subsubsec:client-library} \autocite{Microsoft2020}.
 
-\textcite{fusi2017} is de grondslag voor Azure ML Studio, het achterliggende systeem gebruikt \textit{bayesian optimization} en leunt aan bij technieken die besproken zijn in \textcite{Feurer2015}. Het bekomt een resultaat door \textit{collaborative filtering} te verwerken in \textit{hyperparameter tuning}. Hierbij wordt een voorspelling gemaakt op basis van informatie die verkregen is van een vorig getraind model die gelijkaardige keuzes vertoont. De verzamelde en geregulariseerde gegevens worden in een matrix gegoten\footnote{Deze techniek word \textit{matrix factorization} genoemd.} en kan zo gebruikt worden door het model.
+\textcite{fusi2017} is de grondslag voor Azure ML Studio, het achterliggende systeem gebruikt \textit{bayesian optimization} en leunt aan bij technieken die besproken zijn in \textcite{Feurer2015}. Het bekomt een resultaat door \textit{collaborative filtering} te verwerken in \textit{hyperparameter tuning}. Hierbij wordt een voorspelling gemaakt op basis van informatie die verkregen is van een vorig getraind model die gelijkaardige keuzes vertoont. De verzamelde en geregulariseerde gegevens worden in een matrix gegoten\footnote{Deze techniek wordt \textit{matrix factorization} genoemd.} en kan zo gebruikt worden door het model.
 
 \subsection{AutoKeras}
 \label{subsec:autokeras}
