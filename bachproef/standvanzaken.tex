@@ -7,12 +7,12 @@
 
 % Pas na deze inleidende paragraaf komt de eerste sectiehoofding.
 
-Dit onderzoek richt zich op automatische \textit{machine learning} platformen. Maar alvorens van start te gaan met de onderliggende technieken is het belangrijk om een goed zicht te hebben op de basis waarop het gebouwd is. Zo zijn eerst een aantal belangrijke begrippen en technieken besproken, deze sectie kan overgeslagen worden als deze intro triviaal is voor de lezer. De automatisatie hiervan werd onderzocht, welke technieken zijn met elkaar gecombineerd en hoe bekom je uiteindelijk resultaten. Het is nodig om de theoretische benadering goed te begrijpen om uiteindelijk te kunnen beslissen als het resultaat van het experiment voldoet aan de normen van een goed werkend model. Tot slot werden de beschikbare cloud platformen besproken en vergeleken met een open source libraries als alternatief.
+Dit onderzoek richt zich op automatische \textit{machine learning} platformen. Maar alvorens van start te gaan met de onderliggende technieken is het belangrijk om een goed zicht te hebben op de basis waarop het gebouwd is. Zo zijn eerst een aantal belangrijke begrippen en technieken besproken, deze sectie kan overgeslagen worden als deze intro triviaal is voor de lezer. De automatisatie hiervan werd onderzocht, welke technieken zijn met elkaar gecombineerd en hoe bekom je uiteindelijk resultaten. Het is nodig om de theoretische benadering goed te begrijpen om uiteindelijk te kunnen beslissen of het resultaat van het experiment voldoet aan de normen van een goed werkend model. Tot slot werden de beschikbare cloud platformen besproken en vergeleken met een open source libraries als alternatief.
 
 \section{Inleiding machine learning}
 \label{sec:inl-machine-learning}
 
-Deze sectie dient om mensen zonder kennis van machine learning bekend te maken met enkele begrippen en technieken binnen het werkveld. Mensen met enige basiskennis kunnen direct doorgaan naar de volgende sectie.
+Deze sectie dient om mensen zonder kennis van \textit{machine learning} te introduceren met enkele begrippen en technieken binnen het werkveld. Mensen met enige basiskennis kunnen direct doorgaan naar de volgende sectie.
 
 Het is belangrijk dat volgende begrippen gekend zijn:
 \begin{itemize}
@@ -43,7 +43,7 @@ Classificatie is een typisch probleem dat opgelost wordt met gesuperviseerd lere
 \subsubsection{Ongesuperviseerd leren}
 \label{subsubsec:ongesuperviseerd-leren}
 
-Met ongesuperviseerd leren is het mogelijk om in een ongelabelde dataset patronen te vinden die eerder onbekend waren. Bij elke voospelling wordt voor elke categorie meegegeven hoe zeker het model is over zijn voorspelling \autocite{Hinton1999}.
+Met ongesuperviseerd leren is het mogelijk om in een ongelabelde dataset patronen te vinden die eerder onbekend waren. Bij elke voorspelling wordt voor elke categorie meegegeven hoe zeker het model is over zijn voorspelling \autocite{Hinton1999}.
 
 Een ongelabelde dataset met gegevens over klanten waarvoor je te weten wilt komen als er onderliggende groepen ontdekt kunnen worden. Dit wordt ook clustering genoemd, een mogelijke oplossing is \autocite{Lievens2019}:
 
@@ -110,28 +110,28 @@ De technieken uit Sectie \ref{sec:hyperparameter-tuning} zijn onderliggend verwe
 
 \textit{Neural Architecture Search} gebruikt \textit{Reinforcement Learning} om een model te trainen. Deze manier van werken is fundamenteel anders dan gesuperviseerd / ongesuperviseerd leren omdat het model niet beter wordt door het gebruik van datasets. Als alternatief kan het neuraal netwerk beloningssignalen herkennen waardoor het kan leren welke acties leiden tot een positief resultaat \autocite{Lievens2019}.
 
-Op figuur \ref{fig:nas-bp} wordt gevisualiseerd hoe dit werkt. Op basis van controller structuur A (waarbij A een neuraal netwerk is) wordt een string met variabele lengte gegenereerd. Deze waarden worden gebruikt als hyperparameters om een kind-netwerk aan te maken, die getraind wordt met echte data en waarbij de accuraatheid gemeten wordt aan de hand van een validatie dataset. Het resultaat wordt gebruikt als beloningssignaal voor de controller, bij de volgende iteratie kan deze hogere kansen geven aan parameters die leiden tot accurate voorspellingen \autocite{ZophL2016}. De controller zijn zoekfunctie zal dus verbeteren over tijd.
+Op figuur \ref{fig:nas-bp} wordt gevisualiseerd hoe dit werkt. Op basis van controller structuur A (waarbij A een neuraal netwerk is) wordt een string met variabele lengte gegenereerd. Deze waarden worden gebruikt als hyperparameters om een kind-netwerk aan te maken, die getraind wordt met echte data en waarbij de accuraatheid gemeten wordt aan de hand van een validatie dataset. Het resultaat wordt gebruikt als beloningssignaal voor de controller, bij de volgende iteratie kan deze hogere kansen geven aan parameters die leiden tot accurate voorspellingen \autocite{ZophL2016}. De controller zijn zoekfunctie zal dus verbeteren met de tijd.
 
 \subsubsection{Verbeteringen met Network Morphism}
 \label{subsubsec:network-morphism}
 
 In de tweede alinea van sectie \ref{sec:nas} is al gesproken over de grote hoeveelheid resources die nodig zijn om tot de voorgestelde resultaten te komen. De afhankelijkheid van die \textit{resources} zorgt ervoor dat er geen praktische manier is om het systeem te gebruiken als die capaciteiten niet beschikbaar zijn \autocite{Cai2017}. \textcite{Cai2017} zegt dat het verlies in performantie komt omdat elk kind-netwerk volledig vanaf nul getraind wordt, zonder kennis te hebben van vorige bewandelde paden. De technologie is bewezen, de moeilijkheid bevindt zich nu in het reproduceren met minder rekenkracht.
 
-Denk maar aan hoe menselijke expertise tot stand komt. De herhalende taakt moet kennis opleveren over de gekozen gewichten, architectuur en meer \autocite{Chen2016}. Dit zonder telkens gereset te worden.
+Denk maar aan hoe menselijke expertise tot stand komt. De herhalende taak moet kennis opleveren over de gekozen gewichten, architectuur en meer \autocite{Chen2016}. Dit zonder telkens gereset te worden.
 
 \textit{Network Morphism} tracht de bestaande kennis van een model uit te breiden door netwerkoperaties uit te voeren (lagen toevoegen, uitbreiden ...) zonder het oorspronkelijk model aan te passen \autocite{Cai2017}. Met een voorgedefinieerde transformatie functie kan bestaande kennis in een nieuw model gepompt worden zodat het dezelfde taak kan uitvoeren. Met andere parametrisatie gecombineerd met het gebruik van \textit{reinforcement learning} (zie sectie \ref{subsubsec:reinforcement-learning}) bekom je volgens \textcite{Cai2017} een \textit{meta-controller} met verbeterde performantie.
 
 \section{Hyperparameter tuning}
 \label{sec:hyperparameter-tuning}
 
-In de vorige sectie is het gebruik van parameters aan bod gekomen. \textit{Neural Architecture Search} en \textit{Hyperparameter tuning} zijn dan ook sterk gerelateerd aan elkaar. De normale parameters bepalen het gedrag van een neuraal netwerk en hebben een grote invloed op het eindresultaat. Het gegeven gewicht aan een parameter stelt, zoals eerder vermeld, hoe groot de invloed is van deze laag / neuron op de voorspelling. \textcite{GoogleHT2020} verduidelijkt dat hyperparameters eigen zijn aan de configuratie en niet aan het model. Zo moet er bepaald worden hoeveel lagen en het aantal neuronen per laag er zijn. Tijdens het trainen blijven deze constant. Volgens \textcite{Brust2019} zijn er verschillende manieren om de hyperparameters te optimaliseren. \textit{Brute force} zal elke configuratie overlopen en beslissen hoe het model vordert terwijl \textit{feature selection} gewichten aan verschillende hyperparameters geeft. Op die manier hebben vorige simulaties een impact bij de selectie van een nieuwe set hyperparameters \autocite{Claesen2015}. In \textcite{Bergstra2011} wordt nog gesproken over \textit{Random Search} die in sommige gevallen dezelfde (slechte) performantie heeft als \textit{Brute force}, en de meer gesofisticeerde methodes die verder besproken worden. 
+In de vorige sectie is het gebruik van parameters aan bod gekomen. \textit{Neural Architecture Search} en \textit{Hyperparameter tuning} zijn dan ook sterk gerelateerd aan elkaar. De normale parameters bepalen het gedrag van een neuraal netwerk en hebben een grote invloed op het eindresultaat. Het gegeven gewicht aan een parameter stelt, zoals eerder vermeld, hoe groot de invloed is van deze laag / neuron op de voorspelling. \textcite{GoogleHT2020} verduidelijkt dat hyperparameters eigen zijn aan de configuratie en niet aan het model. Zo moet er bepaald worden hoeveel neuronen er in elke laag zijn. Tijdens het trainen blijven deze constant. Volgens \textcite{Brust2019} zijn er verschillende manieren om de hyperparameters te optimaliseren. \textit{Brute force} zal elke configuratie overlopen en beslissen hoe het model vordert terwijl \textit{feature selection} gewichten aan verschillende hyperparameters geeft. Op die manier hebben vorige simulaties een impact bij de selectie van een nieuwe set hyperparameters \autocite{Claesen2015}. In \textcite{Bergstra2011} wordt nog gesproken over \textit{Random Search} die in sommige gevallen dezelfde (slechte) performantie heeft als \textit{Brute force}, en de meer gesofisticeerde methodes die verder besproken worden. 
 
 \textcite{ZophL2016} stelt dat deze methoden in het algemeen minder goed werken dan Neural Architecture Search, dit is omdat de netwerk configuraties gevormd worden in een zoekruimte met vaste lengte. Bayesian optimization \autocite{Bergstra2013}, een variant van \textit{hyperparameter tuning}, werkt wel met variabele zoekruimtes maar blijven minder flexibel dan wat er voorgesteld wordt bij \textit{Neural Architecture Search}. In de praktijk bekomt men wel vaak een goed resultaat als er een initieel model bijgeleverd wordt \autocite{ZophL2016}.
 
 \subsection{Meta-learning}
 \label{subsec:meta-learning}
 
-De principes achter de systemen die zelf leren en verbeteren komen uit \textcite{Schmid1987}. Het doel ervan is om aan de hand van randinformatie te begrijpen hoe leerproblemen flexibel worden. Die kennis kan verder ook gebruikt worden om herhalende taken te verbeteren over tijd \autocite{ZophL2016}. De typische benaming is 'leren leren'.
+De principes achter de systemen die zelf leren en verbeteren komen uit \textcite{Schmid1987}. Het doel ervan is om aan de hand van randinformatie te begrijpen hoe leerproblemen flexibel worden. Die kennis kan verder ook gebruikt worden om herhalende taken te verbeteren met de tijd \autocite{ZophL2016}. De typische benaming is 'leren leren'.
 
 Randinformatie in deze situatie wordt ook metadata genoemd. Dit is niet meer dan informatie over andere data. Voorbeelden van metadata kunnen zijn: eigenschappen van het algoritme (\textit{metrics} die de performantie meten) of informatie over het probleem. In \textcite{Schmidhuber1993} wordt het principe getoond waarbij een zelf refererend neuraal netwerk zijn eigen gewichtenmatrix kan aanpassen. Een vaak gebruikt aanpassingsalgoritme is \textit{gradient descent} waarbij de principes van \textit{meta-learning} verwerkt worden.
 
@@ -156,7 +156,7 @@ In figuur \ref{fig:ensemble-ozone} is te zien hoe \textit{bagging} tot zijn resu
 
 \textit{Bayesian optimization} probeert aan de hand van het probabiliteitsmodel P(score|configuratie) voorspellingen te maken over de hyperparameters \autocite{Bergstra2013}. De resultaten worden bekomen door aanpassingen te doen aan de vorige waarden van score en configuratie. In \textcite{Bergstra2013} staat dat de efficiëntie komt van het enkel overlopen van veelbelovende kandidaten uit het origineel systeem.
 
-Desondanks er een extra abstractie laag toegevoegd wordt, is het toch bruikbaar als men honderden hyperparameters moet evalueren \autocite{Bergstra2013}.
+Zelfs met die extra abstractie laag, is het toch bruikbaar als men honderden hyperparameters moet evalueren \autocite{Bergstra2013}.
 
 \section{AutoML platformen}
 \label{sec:automl-platformen}
@@ -178,9 +178,9 @@ In deze sectie worden enkele mogelijkheden besproken.
 
 Google Cloud AutoML zorgt voor een familiaire interface die een gebruiker snel op weg helpt. Naast Google hebben bedrijven zoals Microsoft en Amazon een platform gebouwd op hun respectievelijke cloud infrastructuur. De AutoML service kan voordelig zijn als het bedrijf al gebruik maakt van andere producten / diensten van de leverancier, extra kosten kunnen snel de lucht in gaan zonder toegang tot andere functies (bv. van Google Cloud) als dit niet het geval is. 
 
-Zoals veel Google producten, heeft Cloud AutoML een familiaire interface die een gebruiker snel op weg helpt. Het proces is bijna even simpel als hun voorstelling in figuur \ref{fig:google-cloud-automl}, enkel het structureren van de dataset is niet opgenomen in de flow. De AutoML service heeft een goede kans om door te groeien in het bestaande platform van Google Cloud. De simultane werking tussen meerdere Cloud producten kan interessant zijn mocht het bedrijf gepartnered zijn met Google.
+Zoals veel Google producten, heeft Cloud AutoML een familiaire interface die een gebruiker snel op weg helpt. Het proces is bijna even simpel als hun voorstelling in figuur \ref{fig:google-cloud-automl}, enkel het structureren van de dataset is niet opgenomen in de flow. De AutoML service heeft een goede kans om door te groeien in het bestaande platform van Google Cloud. De simultane werking tussen meerdere Cloud producten kan interessant zijn mocht het bedrijf gepartnerd zijn met Google.
 
-Achterliggend zal alvast \textit{Neural Architecture Search} gebruikt worden aangezien dat idee ontstaan is door Google Brain onderzoek \autocite{ZophL2016}. Over de manier waarop het intern gebruikt wordt is echter zeer weinig documentatie beschikbaar voor het publiek. Logisch, het blijft natuurlijk een betalende dienst. Als bijgevolg kan er enkel vanuit gegaan worden dat de abstracte concepten die eerder besproken, verwerkt zijn. De werkelijke combinaties en configuraties zijn puur giswerk. 
+Achterliggend zal alvast \textit{Neural Architecture Search} gebruikt worden aangezien dat idee ontstaan is door Google Brain onderzoek \autocite{ZophL2016}. Over de manier waarop het intern gebruikt wordt is echter zeer weinig documentatie beschikbaar voor het publiek. Logisch, het blijft natuurlijk een betalende dienst. Bijgevolg, kan er enkel vanuit gegaan worden dat de abstracte concepten die eerder besproken werden, verwerkt zijn. De werkelijke combinaties en configuraties zijn puur giswerk. 
 
 \subsubsection{Client library}
 \label{subsubsec:client-library}
@@ -225,7 +225,7 @@ TPOT wordt samen vermeld met Auto-sklearn omdat beide gebouwd zijn op sklearn \a
 \section{Deployment}
 \label{sec:deployment}
 
-Voor een development team is het niet voldoende om enkel en alleen een model te trainen. Om het te kunnen gebruiken moet het ergens online staan zodat de applicatie waarin het verwerkt zit kan communiceren met het model. Bij de grote platformen zal het uitgerold worden op hun cloud services. Dat maakt nu eenmaal deel uit van hun kostenmodel. De gebruiker hangt dus in enigste zin vast aan zijn provider. 
+Voor een development team is het niet voldoende om enkel en alleen een model te trainen. Om het te kunnen gebruiken moet het ergens online staan zodat de applicatie waarin het verwerkt zit kan communiceren met het model. Bij de grote platformen zal het uitgerold worden op hun cloud services. Dat maakt nu eenmaal deel uit van hun kostenmodel. De gebruiker hangt dus gedeeltelijk vast aan zijn provider. 
 In open source libraries is daar geen rekening mee gehouden. Een simpele oplossing is om zelf een REST API te schrijven. Er is geen beste manier omdat elke implementatie afhankelijk is van het export type van de library die je gebruikt. Om toch een representatief voorbeeld te geven wordt het deployment proces van een Keras model (export type van AutoKeras) besproken. 
 
 Een goede strategie is om je API te bouwen in de taal waarin de library geschreven is. Zo kan je de bestaande interfaces van het geëxporteerde model direct aanspreken. In dit geval is het Python + Flask framework. Om het op een productie niveau te krijgen is het een goed idee om ook Redis\footnote{Redis is een gedistribueerde key-value store die volledige objecten in zijn geheugen kan opslaan en in deze situatie gebruikt wordt om wachtrijen te optimaliseren \autocite{Adrian2018}.} te implementeren. Dan rest enkel nog de hosting, waardoor je soms toch uitkomt bij de grote platformen zoals Amazon AWS, Google Cloud Hosting enzovoort.

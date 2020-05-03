@@ -15,7 +15,7 @@ Om tot een correct mogelijk resultaat te komen is het belangrijk om een grondige
 
 Er werden meerdere prototypes opgezet die telkens volgens dezelfde criteria gequoteerd zijn. Verdere informatie over de gebruikte datasets is beschreven in sectie \ref{sec:datasets}. De vereisten waaraan elk systeem zo veel mogelijk aan moet voldoen worden toegelicht aan de hand van een requirements analyse in sectie \ref{sec:requirements}.
 
-Het hoofddoel van dit onderzoek is ontdekken als de huidige staat van de technologie bruikbaar is in een bedrijfscontext zonder extreme operationele veranderingen. Dit kan afhangen van kosten om het systeem te gebruiken, extra mankracht die nodig is, eventuele omscholing enzovoort. De conclusie werd rond die vereisten geformuleerd. Omdat er verschillende implementaties getest zijn is het ook een vergelijkende studies en werden ze onderling tegen elkaar geëvalueerd. Dit niet alleen vanuit een technologisch standpunt (wat onderzocht werd in deze studie) maar ook de bijdrage die het levert aan de \textit{business value}. Om dit zo correct mogelijk te doen is in de achtergrond van de conclusie rekening gehouden met resultaten uit een studie vanuit een economisch standpunt. 
+Het hoofddoel van dit onderzoek is ontdekken of de huidige staat van de technologie bruikbaar is in een bedrijfscontext zonder extreme operationele veranderingen. Dit kan afhangen van kosten om het systeem te gebruiken, extra mankracht die nodig is, eventuele omscholing enzovoort. De conclusie werd rond die vereisten geformuleerd. Omdat er verschillende implementaties getest zijn is het ook een vergelijkende studies en werden ze onderling tegen elkaar geëvalueerd. Dit niet alleen vanuit een technologisch standpunt (wat onderzocht werd in deze studie) maar ook de bijdrage die het levert aan de \textit{business value}. Om dit zo correct mogelijk te doen is in de achtergrond van de conclusie rekening gehouden met resultaten uit een studie vanuit een economisch standpunt. 
 
 \section{Dataset}
 \label{sec:datasets}
@@ -55,12 +55,12 @@ De keuze van de dataset is belangrijk. Dit onderzoek wil de capaciteiten van Aut
     \label{fig:catdog-bad}
 \end{figure}
 
-Alle systemen zijn getraind met een online\footnote{\url{https://www.kaggle.com/c/dogs-vs-cats/data}} dataset over katten en honden. Ooit was de dataset het onderwerp van een \textit{data science} wedstrijd en mogen vrij gebruikt worden. Het bestaat uit 250000 foto's die gelijkaardig zijn aan de afbeeldingen in figuur \ref{fig:catdog-good}. Er is niks van \textit{preprocessing} toegepast, de foto's kunnen dus evengoed op uw smartphone staan. Door realistische foto's te gebruiken introduceren we een nieuwe moeilijkheid voor de optimalisatiealgoritmen, zo moeten ze ook rekening houden met volgende zaken: 
+Alle systemen zijn getraind met een online\footnote{\url{https://www.kaggle.com/c/dogs-vs-cats/data}} dataset over katten en honden. Ooit was de dataset het onderwerp van een \textit{data science} wedstrijd en mogen nu dus vrij gebruikt worden. Het bestaat uit 250000 foto's die gelijkaardig zijn aan de afbeeldingen in figuur \ref{fig:catdog-good}. Er is niks van \textit{preprocessing} toegepast, de foto's kunnen dus evengoed op uw smartphone staan. Door realistische foto's te gebruiken introduceren we een nieuwe moeilijkheid voor de optimalisatiealgoritmen, zo moeten ze ook rekening houden met volgende zaken: 
 
 \begin{itemize}
     \item Foto's kunnen zeer verschillende resoluties hebben
     \item De kleuren zijn in 3 dimensies (rood, groen, blauw)
-    \item Door het originele formaat te behouden en de afbeelding niet te knippen naar het dier zelf, kan het zijn dat de focus van de afbeelding niet op het dier ligt (zie afbeeldingen in figuur \ref{fig:catdog-bad})
+    \item Door het originele formaat te behouden en de afbeelding niet te knippen, kan het zijn dat de focus van de afbeelding niet op het dier ligt (zie afbeeldingen in figuur \ref{fig:catdog-bad})
 \end{itemize}
 
 Onduidelijke foto's zijn in de minderheid maar handig om te ontdekken waaraan het model gevoelig is.

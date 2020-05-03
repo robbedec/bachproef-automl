@@ -47,7 +47,7 @@ Op de cloud platformen moeten geen speciale drivers geïnstalleerd worden maar e
 
 De dataset bestaat deels uit een gelabelde afbeeldingen. Het bevat ook een verzameling ongelabelde afbeeldingen die tijdens de wedstrijd gebruikt werden als verificatie. In het kader van het onderzoek kunnen deze weggelaten worden en gaan we aan de slag met de gelabelde data. Elke afbeelding wordt genormaliseerd naar een standaard resolutie en omgezet naar een \textit{numpy array}\footnote{In de code is 'np' een verwijzing naar \textit{numpy}}. Dit zijn de kleurwaarden van elke pixel die samen een matrix vormen. Ook het label van de afbeelding is opgenomen in de matrix (0 = hond, 1 = kat). Momenteel staat alle data nog gegroepeerd volgens categorie. Voor de volgende stap is het belangrijk dat dit niet het geval is. Daarom wordt de matrix nog eens random gesorteerd.
 
-Om consistentie tussen de experimenten te behouden wordt de matrix opgeslagen en bij een nieuwe configuratie terug ingeladen. De data transformatie wordt zo één maal uitgevoerd.
+Om consistentie tussen de experimenten te behouden wordt de matrix opgeslagen en bij een nieuwe configuratie terug ingeladen. De data transformatie wordt zo éénmaal uitgevoerd.
 
 \bigskip
 
@@ -77,7 +77,7 @@ def get_data():
 \section{Data preprocessing}
 \label{sec:preprocessing-autokeras}
 
-Een van de requirements is dat de \textit{preprocessing} voor de gebruiker gedaan wordt. Bij AutoKeras is dit niet het 100\% het geval en moeten er zelf nog enkele zaken uitgevoerd worden. Zo moet de matrix die gemaakt is in sectie \ref{subsec:autokeras-tranform} opgedeeld worden in training en validatie datasets.
+Een van de requirements is dat de \textit{preprocessing} voor de gebruiker gedaan wordt. Bij AutoKeras is dit niet 100\% het geval en moeten er zelf nog enkele zaken uitgevoerd worden. Zo moet de matrix die gemaakt is in sectie \ref{subsec:autokeras-tranform} opgedeeld worden in training en validatie datasets.
 
 In \textit{data science} projecten wordt typisch x\_test en x\_train gebruikt om de \textit{features} van de afbeeldingen op te slaan, de matrix met pixel waarden. y\_test y\_train bevatten dan het bijhorend label. In de tweede stap wordt er dimensiereductie toegepast. De algoritmes houden geen rekening met kleuren dus die mogen we weglaten. De drie kleurendimensies (Rood, Groen, Blauw) worden omgezet naar één dimensie (grijswaarden).
 
@@ -99,7 +99,7 @@ x_test /= 255
 \section{Model trainen en evalueren}
 \label{sec:traineval-autokeras}
 
-Met alle voorbereiding afgewerkt is het tijd om \textit{classifier} in gang te steken. Hierbij moet enkel een naam (voor het uiteindelijke model) en het maximum aantal pogingen meegegeven worden. Op voorhand kan er niet ingesteld worden hoe lang er gezocht mag worden. Het is wel mogelijk dat het vroegtijdig geëindigd wordt (voor max. aantal pogingen bereikt is) omdat de \text{loss value} niet genoeg zakt over x-aantal iteraties.
+Na alle voorbereiding is het tijd om de \textit{classifier} in gang te steken. Hierbij moet enkel een naam (voor het uiteindelijke model) en het maximum aantal pogingen meegegeven worden. Op voorhand kan er niet ingesteld worden hoe lang er gezocht mag worden. Het is wel mogelijk dat het vroegtijdig beëindigd wordt (voor max. aantal pogingen bereikt is) omdat de \text{loss value} niet genoeg zakt over x-aantal iteraties.
 
 Met de \pyth{clf.fit()} methode wordt het best passend model gekozen. Met de validatie dataset kan uiteindelijk de performantie van het model gemeten worden. \pyth{clf.evaluate()} geeft twee scores terug. Eerst de \textit{loss value}, het is een interpretatie die kijkt hoe goed het model scoort door training en validatie data te nemen. Let wel op dat de validatie dataset die wij definiëren enkel gebruikt wordt als \pyth{clf.evaluate()} uitgevoerd wordt. AutoKeras neemt van de trainings dataset standaard 20\% om te gebruiken als interne validatie tijdens het trainen. De tweede waarde is het percentage van correct voorspelde afbeeldingen.
 
@@ -262,7 +262,7 @@ Verder worden beide modellen vermeld als model A (max. 5 pogingen) en model B (m
     \label{fig:autokeras-overfit}
 \end{figure}
 
-Wat meteen opvalt is dat een hoger aantal pogingen geen zekerheid is op betere prestaties. Er wordt zo enkel de mogelijkheid gegeven op een uitgebreidere exploratie van de zoekruimte. Zo kan het algoritme bijvoorbeeld een extreem \textit{overfitted} model trainen in de hoop om die later te combineren met een andere om tot een beter resultaat te bekomen, een toepassing van \textit{ensemble construction} (zie sectie \ref{subsec:ensemble-construction}). Afbeelding \ref{fig:autokeras-overfit} komt rechtstreeks uit de output van model B en is niet te vinden in model A.
+Wat meteen opvalt is dat een hoger aantal pogingen geen zekerheid is op betere prestaties. Zo wordt enkel de mogelijkheid gegeven op een uitgebreidere exploratie van de zoekruimte. Zo kan het algoritme bijvoorbeeld een extreem \textit{overfitted} model trainen in de hoop om die later te combineren met een andere om een beter resultaat te bekomen, een toepassing van \textit{ensemble construction} (zie sectie \ref{subsec:ensemble-construction}). Afbeelding \ref{fig:autokeras-overfit} komt rechtstreeks uit de output van model B en is niet te vinden in model A.
 
 \begin{figure}[b!]
     \begin{subfigure}{0.5\textwidth}
@@ -352,4 +352,4 @@ Het gebruik van de \textit{library} zelf is volledig gratis. Ook voor het result
 \subsubsection{Verwerking}
 \label{sucsubsec:autokeras-nfr-verwerking}
 
-Omdat de meeste \textit{wrappers} geschreven zijn in Python, is het een goede keuze om een eigen API mee te maken. Voor Flask zijn er online zeer veel \textit{tutorials} beschikbaar. Ook hierover is meer informatie te vinden in sectie \ref{sec:deployment}.
+Omdat de meeste \textit{wrappers} geschreven zijn in Python, is het een goede keuze om er een eigen API mee te maken. Voor Flask zijn er online zeer veel \textit{tutorials} beschikbaar. Ook hierover is meer informatie te vinden in sectie \ref{sec:deployment}.
