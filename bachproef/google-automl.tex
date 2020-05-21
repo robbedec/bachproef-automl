@@ -81,6 +81,8 @@ Om het trainen te starten moet nu enkel het csv bestand (dat op Google Cloud Sto
 
 Elke dataset is gelijk verdeeld over de twee categorieën. Als er dus over 10000 afbeeldingen gesproken wordt, zijn het in feite 5000 katten en 5000 honden.
 
+Eenmaal een model getraind is, kan het nog verbeteren door extra \textit{node} uren te alloceren aan het model. Het trainingsproces kiest een vorige stap en hervat de exploratie in dat deel van de zoekruimte. Een bestaand model kan niet verder getraind worden met een nieuwe dataset. Het is wel mogelijk om meerdere modellen te trainen in hetzelfde project zodat er na (positieve) aanpassingen in de dataset een evolutie in de modellen is. Deze worden \textit{edge exportable models} genoemd \autocite{GoogleEdge2020}.
+
 \section{Resultaten}
 \label{sec:google-automl-results}
 
@@ -222,7 +224,7 @@ Voorgaande begrippen zijn onderling verwerkt in de \textit{confusion matrix}, di
 
 Het aantal gekozen \textit{nodes} van een \textit{deployment} configuratie. Elke \textit{node} kan op zich 3.2 requests per seconde uitvoeren. Deze schalen lineair, tien \textit{nodes} kunnen dan 32 afbeeldingen per seconde verwerken.
 
-Voorspellingen kunnen ook in de Google Cloud Console gemaakt worden. De interface ondersteund een \textit{batch} van maximaal tien afbeeldingen. 
+Voorspellingen kunnen ook in de Google Cloud Console gemaakt worden. De interface ondersteunt een \textit{batch} van maximaal tien afbeeldingen. 
 
 Het aantal \textit{nodes} zijn vrij te configureren. De gebruiker beslist zelf de capaciteit die het model ondersteunt. Het is perfect mogelijk om in één job 100.000 afbeeldingen door te sturen.
 
@@ -232,7 +234,7 @@ Het aantal \textit{nodes} zijn vrij te configureren. De gebruiker beslist zelf d
 \subsubsection{Deployment}
 \label{sucsubsec:google-nfr-deployment}
 
-Met enkele klikken kan het volledig werken. De nodige infrastructuur wordt ook vrijgemaakt in Google Cloud. De bestaande oplossing kan makkelijk uitgebreid worden met bijvoorbeeld Redis.
+Met enkele klikken kan het volledig werken. De nodige infrastructuur wordt ook vrijgemaakt in Google Cloud. De bestaande oplossing kan makkelijk uitgebreid worden met bijvoorbeeld Redis. Een model kan ook geëxporteerd als TensorFlow model om een eigen \textit{deployment} te voorzien of om het lokaal te gebruiken.
 
 \subsubsection{Performantie}
 \label{sucsubsec:google-nfr-performantie}
@@ -257,7 +259,7 @@ Op de gekozen dataset wordt een vergelijkbare score behaald als de top scores va
 
 Om de totale kostprijs te berekenen moet er toch rekening gehouden worden met een aantal zaken, merk op dat er mogelijks nog extra kosten bijkomen door nieuwe toepassingen te introduceren. In het algemeen kan de kostprijs opgedeeld worden in volgende groepen.
 
-Het opslaan van data op Google Cloud is in drie verschillende categorieën. Eerst de standaard data, die veel gebruikt wordt en veel aangepast wordt door de gebruiker. Met Nearline bedoelt men data die af en toe gelezen wordt maar weinig veranderlijk is. Coldline wordt dan gebruikt voor data die enkele malen per kwartaal aangepast wordt, de stap naar archive is niet zo groot als het om back-ups gaat. De prijs van elke soort staat in tabel \ref{table:google-storage-price}.
+Het opslaan van data op Google Cloud is in drie verschillende categorieën. Als gebruiker kan je zelf kiezen in welke regio en in welke \textit{storage class} je de data wilt opslaan. Eerst de standaard data, die veel gebruikt wordt en veel aangepast wordt door de gebruiker. Met Nearline bedoelt men data die af en toe gelezen wordt maar weinig veranderlijk is. Coldline wordt dan gebruikt voor data die enkele malen per kwartaal aangepast wordt, de stap naar archive is niet zo groot als het om back-ups gaat. De prijs van elke soort staat in tabel \ref{table:google-storage-price}.
 
 Het trainen van het model wordt berekend aan de hand van het aantal \textit{node} uren. Elke \textit{node} op zich is een NVIDIA Tesla V100 GPU, die in een schakeling staan om optimaal te werken. Acht \textit{nodes} één uur laten werken staat gelijk aan acht trainingsuren. Per uur bedraagt de kost \$3.15. Een model uitbreiden door extra te laten trainen hanteert hetzelfde tarief.
 
