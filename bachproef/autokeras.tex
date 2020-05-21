@@ -79,7 +79,7 @@ def get_data():
 
 Een van de requirements is dat de \textit{preprocessing} voor de gebruiker gedaan wordt. Bij AutoKeras is dit niet 100\% het geval en moeten er zelf nog enkele zaken uitgevoerd worden. Zo moet de matrix die gemaakt is in sectie \ref{subsec:autokeras-tranform} opgedeeld worden in training en validatie datasets.
 
-In \textit{data science} projecten wordt typisch x\_test en x\_train gebruikt om de \textit{features} van de afbeeldingen op te slaan, de matrix met pixel waarden. y\_test y\_train bevatten dan het bijhorend label. In de tweede stap wordt er dimensiereductie toegepast. De algoritmes houden geen rekening met kleuren dus die mogen we weglaten. De drie kleurendimensies (Rood, Groen, Blauw) worden omgezet naar één dimensie (grijswaarden).
+In \textit{data science} projecten wordt typisch x\_test en x\_train gebruikt om de \textit{features} van de afbeeldingen op te slaan, de matrix met pixel waarden. y\_test y\_train bevatten dan het bijhorend label. In de tweede stap wordt er dimensiereductie toegepast. De algoritmes houden geen rekening met kleuren dus die mogen we weglaten. De drie kleurendimensies (Rood, Groen, Blauw) worden omgezet naar één dimensie (grijswaarden). Deze conversie gebeurt in de laatste twee lijntjes van onderstaande code.
 
 \bigskip
 
@@ -101,7 +101,7 @@ x_test /= 255
 
 Na alle voorbereiding is het tijd om de \textit{classifier} in gang te steken. Hierbij moet enkel een naam (voor het uiteindelijke model) en het maximum aantal pogingen meegegeven worden. Op voorhand kan er niet ingesteld worden hoe lang er gezocht mag worden. Het is wel mogelijk dat het vroegtijdig beëindigd wordt (voor max. aantal pogingen bereikt is) omdat de \text{loss value} niet genoeg zakt over x-aantal iteraties.
 
-Met de \pyth{clf.fit()} methode wordt het best passend model gekozen. Met de validatie dataset kan uiteindelijk de performantie van het model gemeten worden. \pyth{clf.evaluate()} geeft twee scores terug. Eerst de \textit{loss value}, het is een interpretatie die kijkt hoe goed het model scoort door training en validatie data te nemen. Let wel op dat de validatie dataset die wij definiëren enkel gebruikt wordt als \pyth{clf.evaluate()} uitgevoerd wordt. AutoKeras neemt van de trainings dataset standaard 20\% om te gebruiken als interne validatie tijdens het trainen. De tweede waarde is het percentage van correct voorspelde afbeeldingen.
+Met de \pyth{clf.fit()} methode wordt het best passend model gekozen. Met de test dataset kan uiteindelijk de performantie van het model gemeten worden. \pyth{clf.evaluate()} geeft twee scores terug. Eerst de \textit{loss value}, het is een interpretatie die kijkt hoe goed het model scoort door training en test data te nemen. Let wel op dat de test dataset die wij definiëren enkel gebruikt wordt als \pyth{clf.evaluate()} uitgevoerd wordt. AutoKeras neemt van de trainings dataset standaard 20\% om te gebruiken als interne test data tijdens het trainen. De tweede waarde is het percentage van correct voorspelde afbeeldingen.
 
 \bigskip
 
@@ -112,7 +112,7 @@ clf.fit(x_train,y_train, verbose=2)
 score = clf.evaluate(x_test, y_test)
 \end{python}
 
-Momenteel zit er een bug in het \textit{greedy} optimalisatie algoritme van AutoKeras waardoor \textit{classifiers} met een max. aantal pogingen > 5 vroegtijdig beëindigd worden. Een voorlopige oplossing is om een de API van Automodel te gebruiken en zelf de instellingen te configureren. Achterliggend gebeurt dit ook als \pyth{ak.ImageClassifier()} geïnitialiseerd wordt. Als vervanging is er gekozen om \textit{random search} te gebruiken (zie sectie \ref{sec:hyperparameter-tuning}).
+Momenteel zit er een bug in het \textit{greedy} optimalisatie algoritme (dat standaard gebruikt wordt) van AutoKeras waardoor \textit{classifiers} met een max. aantal pogingen > 5 vroegtijdig beëindigd worden. Een voorlopige oplossing is om een de API van Automodel te gebruiken en zelf de instellingen te configureren. Achterliggend gebeurt dit ook als \pyth{ak.ImageClassifier()} geïnitialiseerd wordt. Als vervanging is er gekozen om \textit{random search} te gebruiken (zie sectie \ref{sec:hyperparameter-tuning}).
 
 \bigskip
 
@@ -235,9 +235,20 @@ Het overzicht kan ook geëxporteerd worden naar een afbeelding die beter geforma
 \section{Resultaten}
 \label{sec:results-autokeras}
 
-Zoals eerder vermeld zijn er 2 modellen getraind met als enigste configuratieverschil, het maximum aantal pogingen. In andere woorden is dit het aantal verschillende Keras modellen dat aangemaakt mag worden. De resultaten van beide zijn samengevat in tabel \ref{table:autokeras-results}.
+Zoals eerder vermeld zijn er 2 modellen getraind met als enigste configuratieverschil, het maximum aantal pogingen. In andere woorden is dit het aantal verschillende Keras modellen dat aangemaakt mag worden. De resultaten van beide zijn samengevat in tabel \ref{table:autokeras-results}. 
 
 Verder worden beide modellen vermeld als model A (max. 5 pogingen) en model B (max. 10 pogingen).
+
+\begin{minipage}{\textwidth}
+    De specificaties van het host systeem zijn:
+    \begin{itemize}
+        \item CPU: i7-7700HG
+        \item GPU: Nvidia GeForce GTX 1050 Ti Max-Q
+        \item RAM: 16GB
+    \end{itemize}
+\end{minipage}
+
+\bigskip
 
 \begin{table}[ht]
     \centering
@@ -251,11 +262,11 @@ Verder worden beide modellen vermeld als model A (max. 5 pogingen) en model B (m
         10   & 81.37\%   & 0.7110   & 8u    & 10 \\ 
         \hline
     \end{tabular}
-    \caption{Resultaten AutoKeras}
+    \caption{Resultaten AutoKeras.}
     \label{table:autokeras-results}
 \end{table}
 
-\begin{figure}
+\begin{figure}[b!]
     \centering
     \includegraphics[width=\linewidth]{img/autokeras-overfit.png}
     \caption{Het model expres \textit{overfitten} in het kader van \textit{ensemble construction}.}
@@ -281,7 +292,9 @@ Wat meteen opvalt is dat een hoger aantal pogingen geen zekerheid is op betere p
     \label{fig:confusion-matrices-autokeras}
 \end{figure}
 
+\begin{minipage}{\textwidth}
 De \textit{confusion matrices} in afbeelding \ref{fig:confusion-matrices-autokeras} tonen dat verspreiding van voorspellingen in beide gevallen redelijk overeen komt. Er is te zien dat model B meer aanleunt (en dus meer fouten maakt in die categorie) om kat te voorspellen dan hond, iets dat in model A in evenwicht is.
+\end{minipage}
 
 \begin{figure}
     \centering
@@ -297,7 +310,7 @@ De \textit{confusion matrices} in afbeelding \ref{fig:confusion-matrices-autoker
     \label{fig:wrong-prediction-autokeras-10}
 \end{figure}
 
-Van beide modellen zijn 24 verkeerd voorspelde afbeeldingen gevisualiseerd. Bij sommige afbeelding kan duidelijk afgeleid worden wat de oorzaak is, mensen of andere onbekende objecten op de foto's. Andere zijn moeilijker te verklaren. Voor nu kan er besloten worden dat het model waarschijnlijk moeite heeft met de gespitste oren. Een typisch kenmerk van katten maar het komt soms ook voor bij honden. Maar ook het feit dat soms het volledige lichaam afgebeeld is en soms maar een deel van het hoofd.
+Van beide modellen zijn 24 verkeerd voorspelde afbeeldingen gevisualiseerd (zie Figuren \ref{fig:wrong-prediction-autokeras-5} en \ref{fig:wrong-prediction-autokeras-10}). Bij sommige afbeelding kan duidelijk afgeleid worden wat de oorzaak is, mensen of andere onbekende objecten op de foto's. Andere zijn moeilijker te verklaren. Voor nu kan er besloten worden dat het model waarschijnlijk moeite heeft met de gespitste oren. Een typisch kenmerk van katten maar het komt soms ook voor bij honden. Maar ook het feit dat soms het volledige lichaam afgebeeld is en soms maar een deel van het hoofd.
 
 Met een gemiddelde score van 82\% bekomen we een goed resultaat als er rekening gehouden wordt met de beperkte hoeveelheid \textit{data preprocessing}. Om dit op productie niveau te krijgen moet er wel meer moeite gedaan worden om de trainingsdataset beter te verwerken. Handgemaakte modellen uit de competitie behalen scores tot 98\%\footnote{\url{https://www.kaggle.com/c/dogs-vs-cats/leaderboard}}.
 
