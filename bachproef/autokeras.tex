@@ -25,7 +25,7 @@ Volgende \textit{packages} moeten zelf geïnstalleerd worden:
 \subsection{GPU activatie}
 \label{subsec:autokeras-gpu}
 
-Het verloop van de code is ook hoe je een model van nul kan trainen. Er wordt gewerkt met een \textit{CUDA integrated GPU}, om te testen als \textit{tensorflow} wel echt de GPU gebruikt kunnen er enkele commando's uitgevoerd worden. Als in de output een vermelding over de GPU staat mag u er vanuit gaan dat de die actief is. Meer informatie over CUDA drivers en hoe ze geïnstalleerd moeten worden is te vinden op de site van NVIDIA\footnote{\url{https://developer.nvidia.com/hpc}}.
+Het verloop van de code is ook hoe je een model van nul kan trainen. Er wordt gewerkt met een \textit{CUDA integrated GPU}. Tensorflow ondersteunt GPU acceleratie door middel van de CUDA Toolkit (cuDNN). Het installeren van de juiste drivers en toolkit zorgt er automatisch voor dat Tensorflow en subsequent ook Keras de grafische kaart herkennen en gebruiken om berekeningen mee te maken. Dit gedrag kan geverifieerd worden door enkele commando's uit te voeren in het \textit{notebook}. Als in de output een vermelding over de GPU staat mag u er vanuit gaan dat de die actief is. Meer informatie over de drivers / CUDA Toolkit en hoe ze geïnstalleerd moeten worden is te vinden op de site van NVIDIA\footnote{\url{https://developer.nvidia.com/hpc}}. Specifiek voor Tensorflow\footnote{\url{https://tensorflow.org/install/gpu}} is er een overkoepelende samenvatting die verschillende manieren beschrijft om de juiste \textit{tools} te installeren.
 
 \bigskip
 
@@ -40,7 +40,7 @@ print(get_available_devices())
 
 Een mogelijkse output kan er als volgt uitzien: ['/device:CPU:0', '/device:GPU:0'].
 
-Op de cloud platformen moeten geen speciale drivers geïnstalleerd worden maar enkel een \textit{accelerator} geactiveerd zijn in de \textit{notebook}.
+Op de cloud platformen moeten geen speciale drivers geïnstalleerd worden maar enkel een \textit{accelerator} geactiveerd zijn in het \textit{notebook}. Die kan geselecteerd worden in de instellingen van een \textit{notebook}.
 
 \subsection{Data transformatie}
 \label{subsec:autokeras-tranform}
@@ -312,7 +312,7 @@ De \textit{confusion matrices} in afbeelding \ref{fig:confusion-matrices-autoker
 
 Van beide modellen zijn 24 verkeerd voorspelde afbeeldingen gevisualiseerd (zie Figuren \ref{fig:wrong-prediction-autokeras-5} en \ref{fig:wrong-prediction-autokeras-10}). Bij sommige afbeelding kan duidelijk afgeleid worden wat de oorzaak is, mensen of andere onbekende objecten op de foto's. Andere zijn moeilijker te verklaren. Voor nu kan er besloten worden dat het model waarschijnlijk moeite heeft met de gespitste oren. Een typisch kenmerk van katten maar het komt soms ook voor bij honden. Maar ook het feit dat soms het volledige lichaam afgebeeld is en soms maar een deel van het hoofd.
 
-Met een gemiddelde score van 82\% bekomen we een goed resultaat als er rekening gehouden wordt met de beperkte hoeveelheid \textit{data preprocessing}. Om dit op productie niveau te krijgen moet er wel meer moeite gedaan worden om de trainingsdataset beter te verwerken. Handgemaakte modellen uit de competitie behalen scores tot 98\%\footnote{\url{https://www.kaggle.com/c/dogs-vs-cats/leaderboard}}.
+Met een gemiddelde score van 82\% bekomen we een goed resultaat als er rekening gehouden wordt met de beperkte hoeveelheid \textit{data preprocessing}. Om dit op productie niveau te krijgen moet er wel meer moeite gedaan worden om de trainingsdataset beter te verwerken. AutoKeras is een exploratiemiddel, daarom zijn er voorlopig geen andere functies in de \textit{library} om het verwerken van de dataset te verbeteren. Handgemaakte modellen uit de competitie behalen scores tot 98\%\footnote{\url{https://www.kaggle.com/c/dogs-vs-cats/leaderboard}}.
 
 Tijdens het trainingsproces heeft de aanwezigheid van een TPU geen invloed op de snelheid. Deze wordt gewoonweg niet gebruikt. Een TPU of \textit{tensor processing unit} is een schakeling van \textit{accelerators} die het proces vele malen sneller uitvoert. AutoKeras bied op dit moment geen ondersteuning om deze te gebruiken waardoor er teruggevallen wordt op de GPU's. De afwezigheid vormt wel een nadeel aangezien TPU's verder uitgroeien tot de nieuwe industrie standaard.
 

@@ -265,6 +265,18 @@ Het trainen van het model wordt berekend aan de hand van het aantal \textit{node
 
 De \textit{deployment} kosten hangen dan ook weer af van het aantal \textit{nodes} die actief staan. Elk uur kost \textit{\$1.25} om één \textit{node} te gebruiken, om diezelfde één maand te gebruiken kost dat \$900.
 
+Het is niet ongezien dat er dagelijks 10000 voorspellingen gemaakt moeten worden, bijvoorbeeld in een fabriek waar het model fabricagefouten moet ontdekken aan de lopende band. Hiervoor willen we graag wachtrijen vermijden door meerde \textit{nodes} te activeren. Het voorgestelde model wordt initieel 80 \textit{node} uren getraind.
+
+\begin{equation}
+    \$3.15 node/h * 80 = \$252
+\end{equation}
+
+\begin{equation}
+    \$1.25 node/h * 3 nodes * 24h * 30 dagen = \$2700
+\end{equation}
+
+De eerste maand kost dit model \$2952. Elke maand erna telkens \$2700 + kosten om het model eventueel bij te trainen. Indien het model niet meer verder getraind wordt mag de gebruiker ook de afbeeldingen uit de \textit{data bucket} verwijderen. De initiële kost van de opslag is niet significant voor de uiteindelijke rekening.
+
 Een volledig overzicht van alle kosten binnen de \textit{vision} API is te vinden op de site van Google\footnote{\url{https://www.cloud.google.com/vision/automl/pricing}}.
 
 \subsubsection{Verwerking}
