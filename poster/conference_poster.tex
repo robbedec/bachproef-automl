@@ -38,6 +38,7 @@
 \usepackage{amsfonts, amsmath, amsthm, amssymb} % For math fonts, symbols and environments
 \usepackage{wrapfig} % Allows wrapping text around tables and figures
 \usepackage[export]{adjustbox}
+\usepackage{subfigure}
 
 \begin{document}
 
@@ -76,7 +77,7 @@
 \color{HoGentAccent1} % Navy color for the abstract
 
 \begin{abstract}
-De resultaten van dit onderzoek kunnen gebruikt worden om een keuze te maken tussen een open source of cloud platform waar geautomatiseerde \textit{machine learning} gebruikt kan worden. Alsook in welke situaties het bruikbaar is. Het kan een hulp zijn voor bedrijven waar geen \textit{data scientist} of ML-ingenieurs aanwezig zijn. Of waar deze gewoonweg niet genoeg tijd hebben voor de verschillende projecten. Deze technologie tracht \textit{machine learning} toegankelijker te maken door een manier te bieden om vaak voorkomende problemen te automatiseren. Dit werd onderzocht door met AutoKeras en Google Cloud AutoML elk een prototype op te zetten dat voor een simpel maar realistisch classificatieprobleem de categorie van een afbeelding kan voorspellen. Er werden modellen getraind die katten van honden kunnen onderscheiden. Dit document beschrijft een studie naar de achterliggende gebruikte technieken, het verloop en de resultaten van beide prototypes. Er werd gevonden dat de alternatieven elk hun plaats hebben in verschillende fasen van een project. Google Cloud AutoML levert een productie waardig model terwijl AutoKeras kan dienen als hulpmiddel voor een \textit{data scientist} of productie waardig kan zijn mits een extensieve voorbereiding van de data. De evolutie van de platformen zelf betekent enkel goed nieuws voor de toekomst. Mogelijks kan er nog onderzocht worden hoe het opschonen van de data geautomatiseerd kan worden. Dit is een grote stap binnen geautomatiseerde \textit{machine learning} aangezien het een belangrijke factor is om \textit{edge cases} te herkennen.
+Deze technologie tracht \textit{machine learning} toegankelijker te maken door een manier te bieden om vaak voorkomende problemen te automatiseren. Dit werd onderzocht door met AutoKeras en Google Cloud AutoML elk een prototype op te zetten dat voor een simpel maar realistisch classificatieprobleem de categorie van een afbeelding kan voorspellen. Er werden modellen getraind die katten van honden kunnen onderscheiden. Dit document beschrijft een studie naar de achterliggende gebruikte technieken, het verloop en de resultaten van beide prototypes. Er werd gevonden dat de alternatieven elk hun plaats hebben in verschillende fasen van een project. Google Cloud AutoML levert een productie waardig model terwijl AutoKeras kan dienen als hulpmiddel voor een \textit{data scientist} of productie waardig kan zijn mits een extensieve voorbereiding van de data. De evolutie van de platformen zelf betekent enkel goed nieuws voor de toekomst. Mogelijks kan er nog onderzocht worden hoe het opschonen van de data geautomatiseerd kan worden. Dit is een grote stap binnen geautomatiseerde \textit{machine learning} aangezien het een belangrijke factor is om \textit{edge cases} te herkennen.
 \end{abstract}
 %----------------------------------------------------------------------------------------
 %	INTRODUCTION
@@ -87,12 +88,9 @@ De resultaten van dit onderzoek kunnen gebruikt worden om een keuze te maken tus
 \color{black}
 \color{black}
 
-Het informatie tijdperk centraliseert zich momenteel rond data. Bedrijven zien ook de toegevoegde waarde die het kan hebben in hun bedrijfsprocessen, kijk maar naar de grote spelers in de informaticawereld waar het begrip \textit{Big Data} is ontstaan. In zijn ruwe vorm lijkt het op een gigantische hoop waaruit je niks kan leren, maar wanneer men deze gaat structureren zijn er plots allemaal nieuwe toepassingen beschikbaar. 
-Eén van deze toepassingen die intensief gebruik maakt van data, is \textit{machine learning}. Hierbij wordt geprobeerd computers zaken aan te leren met behulp van een iteratief proces zonder expliciet geprogrammeerd te zijn voor de taken die ze uitvoeren. Mensen die goed overweg kunnen met de data om zo'n model te maken (Machine Learning Engineers / Data Scientists ...)  zijn vaak moeilijk te vinden. Een werkgever die zo'n probleem aan wilt pakken heeft enkele keuzes, AutoML is een mogelijke optie. Alhoewel het interesseveld ontstaan is in de jaren '50, is het nog maar sinds kort een hot topic, met dank aan de grote hoeveelheid rekenkracht in moderne systemen en doorbraken\footnote{Denk maar aan \textit{open source} initiatieven zoals Tensorflow en Keras.} binnen het onderzoeksveld die de toegangsdrempel verlagen.
+Het informatie tijdperk centraliseert zich momenteel rond data. Bedrijven zien ook de toegevoegde waarde die het kan hebben in hun bedrijfsprocessen, kijk maar naar de grote spelers in de informaticawereld waar het begrip \textit{Big Data} is ontstaan. Eén van deze toepassingen die intensief gebruik maakt van data, is \textit{machine learning}. Mensen die goed overweg kunnen met de data om zo'n model te maken (Machine Learning Engineers / Data Scientists ...)  zijn vaak moeilijk te vinden. Een werkgever die zo'n probleem aan wilt pakken heeft enkele keuzes, AutoML is een mogelijke optie. Alhoewel het interesseveld ontstaan is in de jaren '50, is het nog maar sinds kort een hot topic, met dank aan de grote hoeveelheid rekenkracht in moderne systemen en doorbraken binnen het onderzoeksveld die de toegangsdrempel verlagen.
 
-Geautomatiseerde \textit{machine learning} platformen trachten een oplossing te bieden voor \textit{development} teams zonder een gespecialiseerde \textit{machine learning} expert. Het platform voert alle stappen van het proces uit en uiteindelijk moeten ze het enkel in hun product integreren. Deze manier van werken verlaagt niet alleen de druk op \textit{machine learning} experten maar het geeft hen ook de mogelijkheid om mee te werken aan uitdagende projecten of zelf onderzoek uit te voeren. Door de technische afhankelijkheid te verlagen kan de technologie sneller / meer gebruikt worden in bestaande projecten. Omdat bedrijven tot nu toe weinig contact hebben met AI en alles wat er toe behoort, zijn de meeste cases vergelijkbaar met elkaar. Zo heb je bijvoorbeeld binaire classificatie problemen, tekst analyse en meer. Waarom zou het dan niet mogelijk zijn om dit te automatiseren? 
-
-Dit onderzoek bekeek hoe laag de werkelijke instapdrempel ligt bij verschillende platformen (open-source en private oplossingen), alsook hoe zo'n model werkt en welke resultaten je bekomt voor een simpel maar realistisch classificatie probleem.
+Geautomatiseerde \textit{machine learning} platformen trachten een oplossing te bieden voor \textit{development} teams zonder een gespecialiseerde \textit{machine learning} expert. Het platform voert alle stappen van het proces uit en uiteindelijk moeten ze het enkel in hun product integreren. Door de technische afhankelijkheid te verlagen kan de technologie sneller / meer gebruikt worden in bestaande projecten. Omdat bedrijven tot nu toe weinig contact hebben met AI en alles wat er toe behoort, zijn de meeste cases vergelijkbaar met elkaar. Zo heb je bijvoorbeeld binaire classificatie problemen, tekst analyse en meer. Waarom zou het dan niet mogelijk zijn om dit te automatiseren? 
 
 %----------------------------------------------------------------------------------------
 %	GEOLOGY
@@ -104,14 +102,29 @@ Dit onderzoek bekeek hoe laag de werkelijke instapdrempel ligt bij verschillende
 \color{black}
 
 
-\color{HoGentAccent1} 
-\section*{Sectie met figuur}
-\color{black}
+\begin{center}\vspace{1cm}
+    \includegraphics[width=1\linewidth]{./figures/animal.jpg}
+    \captionof{figure}{\color{HoGentAccent5}Voorbeelden van afbeeldingen uit de dataset die gebruikt werd om de modellen te trainen.} 
+    \label{fig:animals}    
+\end{center}
+
+Om de werking van AutoKeras en Google Cloud AutoML te onderzoeken werd voor beide enkele modellen getraind dat voorspeld als het object op een afbeelding een kat of een hond is. Figuur \ref{fig:animals} bevat twee afbeeldingen uit de gebruikte dataset. Het experiment blijft realistisch door de afbeeldingen niet te normaliseren (i.e. ook afbeeldingen gebruiken met ruis, zoals het meisje op de eerste foto).
+
+Beide werden beoordeeld op de implementatie van het proces model uit figuur \ref{fig:proces} alsook op extra (niet-) functionele \textit{requirements}.
 
 \begin{center}\vspace{1cm}
-\includegraphics[width=1.0\linewidth]{grail}
-\captionof{figure}{\color{HoGentAccent5} He hasn't got shit all over him. The nose? Where'd you get the coconuts? What do you mean? We shall say 'Ni' again to you, if you do not appease us}
+    \includegraphics[width=1.0\linewidth]{../bachproef/img/proces-model.png}
+    \captionof{figure}{\color{HoGentAccent5}Afbeelding via Lemahieu, W., Broucke, S. V. \& Baesens, B. (2018). Principles of Database Management: The Practical Guide to Storing, Managing and Analyzing Big and Small Data. USA, Cambridge University Press.}
+    \label{fig:proces}
 \end{center}\vspace{1cm}
+
+In het geval van AutoKeras kan er achteraf bekeken worden welke afbeeldingen verkeer voorspeld werden. Figuur \ref{fig:wrong} bevat negen van die gevallen. Door deze te bekijken is het mogelijk om een inkijk te krijgen in het model. Zo kom je mogelijks te weten waaraan het model gevoelig is, in dit geval zie je snel dat honden met gespitste oren soms als een kat voorspeld werden. Google Cloud AutoML heeft geen diepgaande evaluatiemogelijkheden zoals AutoKeras.
+
+\begin{center}\vspace{1cm}
+    \includegraphics[width=1\linewidth]{./figures/wrong.png}
+    \captionof{figure}{\color{HoGentAccent5}Voorbeelden van afbeeldingen die verkeerd geclassificeerd zijn. Bij elke afbeelding staat de zekerheid van de voorspelling (P, [0,0.5[ = hond, ]0.5,1] = kat) en de verwachte klasse (e).} 
+    \label{fig:wrong}    
+\end{center}
 
 %------------------------------------------------
 
@@ -120,8 +133,6 @@ Dit onderzoek bekeek hoe laag de werkelijke instapdrempel ligt bij verschillende
 \color{HoGentAccent1} 
 \section*{Conclusies}
 \color{black}
-
-AutoML is niet goedkoop, zeker op een cloud platform dat snel drie à vierduizend euro per maand kan kosten om operationeel te blijven. Voor AutoKeras zijn de kosten op het eerste zicht beperkt tot verbruikte elektriciteit en \textit{deployment}. Men moet daarbij rekening houden dat elke stap zelf geprogrammeerd moet worden en er toch enige kennis voor nodig is. Het uiteindelijk resultaat wordt dan deels bepaald door de \textit{data preprocessing} die ook handmatig moet gebeuren, deze stap is een belangrijke \textit{trigger} om hoge scores te behalen zoals bij Google Cloud AutoML.
 
 Beide systemen komen de verwachtingen na maar moeten op de juiste plaats ingezet worden. Zo is Google Cloud AutoML een volwaardig \textit{drop in replacement} in bestaande applicaties. Het proces kan niet eenvoudiger zijn en de verschillende manieren om het te integreren zorgen ervoor dat het in meeste situaties past. AutoKeras, in zijn huidige staat, is niet verfijnd genoeg om productie waardig te zijn. De extra moeite om de eerste stappen van het procesmodel te verbeteren kan evengoed verwisseld worden met een ML-ingenieur die het volledige proces uitvoert. Die niche kennis blijft noodzakelijk om te slagen. Anderzijds blijkt het wel een goede \textit{tool} te zijn in de gereedschapskist van ML-ingenieurs.
 
