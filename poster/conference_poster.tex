@@ -88,9 +88,9 @@ Deze technologie tracht \textit{machine learning} toegankelijker te maken door e
 \color{black}
 \color{black}
 
-Het informatie tijdperk centraliseert zich momenteel rond data. Bedrijven zien ook de toegevoegde waarde die het kan hebben in hun bedrijfsprocessen, kijk maar naar de grote spelers in de informaticawereld waar het begrip \textit{Big Data} is ontstaan. Eén van deze toepassingen die intensief gebruik maakt van data, is \textit{machine learning}. Mensen die goed overweg kunnen met de data om zo'n model te maken (Machine Learning Engineers / Data Scientists ...)  zijn vaak moeilijk te vinden. Een werkgever die zo'n probleem aan wilt pakken heeft enkele keuzes, AutoML is een mogelijke optie. Alhoewel het interesseveld ontstaan is in de jaren '50, is het nog maar sinds kort een hot topic, met dank aan de grote hoeveelheid rekenkracht in moderne systemen en doorbraken binnen het onderzoeksveld die de toegangsdrempel verlagen.
+Het informatie tijdperk centraliseert zich momenteel rond data. Een toepassingen dat intensief gebruik maakt van data, is \textit{machine learning}. Mensen die goed overweg kunnen met de data om zo'n model te maken (Machine Learning Engineers / Data Scientists ...)  zijn vaak moeilijk te vinden. Een werkgever die zo'n probleem aan wilt pakken heeft enkele keuzes, AutoML is een mogelijke optie. Alhoewel het interesseveld ontstaan is in de jaren '50, is het nog maar sinds kort een hot topic, met dank aan de grote hoeveelheid rekenkracht in moderne systemen en doorbraken binnen het onderzoeksveld die de toegangsdrempel verlagen.
 
-Geautomatiseerde \textit{machine learning} platformen trachten een oplossing te bieden voor \textit{development} teams zonder een gespecialiseerde \textit{machine learning} expert. Het platform voert alle stappen van het proces uit en uiteindelijk moeten ze het enkel in hun product integreren. Door de technische afhankelijkheid te verlagen kan de technologie sneller / meer gebruikt worden in bestaande projecten. Omdat bedrijven tot nu toe weinig contact hebben met AI en alles wat er toe behoort, zijn de meeste cases vergelijkbaar met elkaar. Zo heb je bijvoorbeeld binaire classificatie problemen, tekst analyse en meer. Waarom zou het dan niet mogelijk zijn om dit te automatiseren? 
+Geautomatiseerde \textit{machine learning} platformen trachten een oplossing te bieden voor \textit{development} teams zonder een gespecialiseerde \textit{machine learning} expert. Het platform voert alle stappen van het proces uit en uiteindelijk moeten ze het enkel in hun product integreren. Door de technische afhankelijkheid te verlagen kan de technologie sneller / meer gebruikt worden in bestaande projecten.
 
 %----------------------------------------------------------------------------------------
 %	GEOLOGY
@@ -108,17 +108,17 @@ Geautomatiseerde \textit{machine learning} platformen trachten een oplossing te 
     \label{fig:animals}    
 \end{center}
 
-Om de werking van AutoKeras en Google Cloud AutoML te onderzoeken werd voor beide enkele modellen getraind dat voorspeld als het object op een afbeelding een kat of een hond is. Figuur \ref{fig:animals} bevat twee afbeeldingen uit de gebruikte dataset. Het experiment blijft realistisch door de afbeeldingen niet te normaliseren (i.e. ook afbeeldingen gebruiken met ruis, zoals het meisje op de eerste foto).
+Om de werking van AutoKeras en Google Cloud AutoML te onderzoeken werd voor beide enkele modellen getraind die voorspellen als het object op een afbeelding een kat of een hond is. Figuur \ref{fig:animals} bevat twee afbeeldingen uit de gebruikte dataset. Het experiment blijft realistisch door de afbeeldingen niet te normaliseren (i.e. ook afbeeldingen gebruiken met ruis, zoals het meisje op de eerste foto).
 
 Beide werden beoordeeld op de implementatie van het proces model uit figuur \ref{fig:proces} alsook op extra (niet-) functionele \textit{requirements}.
 
 \begin{center}\vspace{1cm}
     \includegraphics[width=1.0\linewidth]{../bachproef/img/proces-model.png}
-    \captionof{figure}{\color{HoGentAccent5}Afbeelding via Lemahieu, W., Broucke, S. V. \& Baesens, B. (2018). Principles of Database Management: The Practical Guide to Storing, Managing and Analyzing Big and Small Data. USA, Cambridge University Press.}
+    \captionof{figure}{\color{HoGentAccent5}Basisstappen voor een \textit{Data Science} project. Afbeelding via Lemahieu, W., Broucke, S. V. \& Baesens, B. (2018). Principles of Database Management: The Practical Guide to Storing, Managing and Analyzing Big and Small Data. USA, Cambridge University Press.}
     \label{fig:proces}
 \end{center}\vspace{1cm}
 
-In het geval van AutoKeras kan er achteraf bekeken worden welke afbeeldingen verkeer voorspeld werden. Figuur \ref{fig:wrong} bevat negen van die gevallen. Door deze te bekijken is het mogelijk om een inkijk te krijgen in het model. Zo kom je mogelijks te weten waaraan het model gevoelig is, in dit geval zie je snel dat honden met gespitste oren soms als een kat voorspeld werden. Google Cloud AutoML heeft geen diepgaande evaluatiemogelijkheden zoals AutoKeras.
+In het geval van AutoKeras kan er achteraf bekeken worden welke afbeeldingen verkeerd voorspeld werden. Figuur \ref{fig:wrong} bevat negen van die gevallen. Door deze te visualiseren is het mogelijk om een inkijk te krijgen in het model. Zo kom je mogelijks te weten waaraan het model gevoelig is, in dit geval zie je snel dat honden met gespitste oren soms als een kat voorspeld werden.
 
 \begin{center}\vspace{1cm}
     \includegraphics[width=1\linewidth]{./figures/wrong.png}
