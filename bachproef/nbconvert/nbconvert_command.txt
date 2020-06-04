@@ -1,1 +1,0 @@
-jupyter nbconvert /path/jupyterscript.ipynb --to latex
